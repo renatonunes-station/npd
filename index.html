@@ -199,6 +199,28 @@ section{margin-bottom:36px}
 .sevchip.inf{background:rgba(255,255,255,.10);color:var(--mut)}
 .sevchip.liv{background:var(--grnbg);color:var(--grn)}
 .sevchip:hover{filter:brightness(1.2)}
+/* ===== dicionário de indicadores ===== */
+.dicgrp{border:1px solid var(--line);border-radius:8px;margin-bottom:10px;overflow:hidden;background:rgba(255,255,255,.02)}
+.dicgrp>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:11px 14px;background:rgba(255,255,255,.03);user-select:none}
+.dicgrp>summary::-webkit-details-marker{display:none}
+.dicgrp>summary:hover{background:rgba(255,255,255,.05)}
+.dicgrp-nome{font-weight:600;color:var(--title);font-size:13.5px}
+.dicgrp-fonte{font-size:11px;color:var(--mut2);border:1px solid var(--line2);border-radius:9999px;padding:2px 9px}
+.dicgrp-n{margin-left:auto;font-size:11px;color:var(--mut);background:rgba(255,255,255,.06);border-radius:9999px;padding:2px 9px;font-weight:600}
+.dicgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;padding:14px}
+.dicitem{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--card)}
+.dichead{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.dichead .policon{color:var(--cyan);display:flex;flex-shrink:0}
+.dichead b{color:#fff;font-size:13px;line-height:1.3}
+.dicsev{margin-left:auto;display:flex;gap:4px;flex-shrink:0}
+.dicsev .sevchip{cursor:default;font-size:9px;padding:3px 9px}
+.dicsev .sevchip:hover{filter:none}
+.dicdef{font-size:12.5px;color:var(--mut);line-height:1.55;margin-bottom:8px}
+.dicmeta{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:11px;color:var(--mut2);margin-bottom:8px}
+.dicmeta b{color:var(--mut);font-weight:600}
+.dicex{font-size:11.5px;color:var(--cyan);line-height:1.5;margin-bottom:4px}
+.dicex b,.dicguard b{color:var(--mut2);font-weight:600}
+.dicguard{font-size:11.5px;color:var(--mut2);line-height:1.5}
 /* ===== regras da política (tabela única) ===== */
 .polhdr{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:4px}
 .stepnum{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:9999px;background:#fff;color:#0b0d1a;font-size:12px;font-weight:700;margin-right:9px;flex-shrink:0}
@@ -829,6 +851,16 @@ details.exp summary:hover{color:#fff}
             <div id="novaregra-list" style="max-height:280px;overflow-y:auto"></div>
           </div>
           <div class="mini" style="margin-top:14px;display:flex;align-items:flex-start;gap:6px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>Somente indicadores configuráveis entram na política. Gráficos, históricos e drill-downs entram como evidência, não como regra direta. Um mesmo indicador pode ter mais de uma regra — cada uma com sua própria condição e severidade — para criar faixas (ex.: Score Positivo PJ abaixo de 300 = Alerta, entre 300 e 500 = Atenção).</div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px">
+          <div class="polhdr">
+            <h4 style="margin:0"><span class="stepnum">2</span>Dicionário de indicadores</h4>
+            <span class="mini" id="dic-count"></span>
+          </div>
+          <div class="mut" style="margin:2px 0 12px;font-size:12.5px">Referência de consulta de todos os indicadores disponíveis para a política, agrupados por fonte. Cada item traz a definição, um exemplo de regra e o guardrail de uso.</div>
+          <div class="field" style="max-width:420px;margin-bottom:14px"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><div class="fw"><label>Buscar no dicionário</label><input id="dic-search" oninput="renderDic(this.value)" placeholder="ex.: score, protesto, autoliquidação, concentração..."></div></div>
+          <div id="dic-list"></div>
         </div>
 
         <div class="card" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
@@ -2154,7 +2186,40 @@ function goPolicy(){
   document.getElementById('nav-cockpit-an').classList.remove('on');
   document.getElementById('nav-pol').classList.add('on');
   polRenderTable();
+  renderDic('');
   window.scrollTo(0,0);
+}
+function dicSevChips(sev){
+  return sevTokens(sev).map(t=>{
+    const k = sevKey(t);
+    return '<span class="sevchip '+k+'">'+sevLabel(k)+'</span>';
+  }).join('');
+}
+function renderDic(q){
+  const box = document.getElementById('dic-list');
+  if(!box) return;
+  q = (q||'').trim().toLowerCase();
+  const match = r => !q || (r.nome+' '+r.def_+' '+r.ex+' '+r.sec).toLowerCase().includes(q);
+  let total = 0;
+  const html = SECORDER.map(sec=>{
+    const itens = POLRULES.filter(r=>r.sec===sec && match(r));
+    if(!itens.length) return '';
+    total += itens.length;
+    const linhas = itens.map(r=>{
+      const kind = (r.nome==='CNAE principal') ? 'multicat' : polCtrlKind(r.tipo);
+      return '<div class="dicitem">'
+        +'<div class="dichead"><span class="policon">'+polKindIcon(kind)+'</span><b>'+r.nome+'</b><span class="dicsev">'+dicSevChips(r.sev)+'</span></div>'
+        +'<div class="dicdef">'+r.def_+'</div>'
+        +'<div class="dicmeta"><span><b>Tipo:</b> '+r.tipo+'</span><span><b>Condição:</b> '+r.op+'</span><span><b>Faixa:</b> '+r.faixa+'</span></div>'
+        +'<div class="dicex"><b>Exemplo de regra:</b> '+r.ex+'</div>'
+        +'<div class="dicguard"><b>Guardrail:</b> '+r.guard+'</div>'
+        +'</div>';
+    }).join('');
+    return '<details class="dicgrp" open><summary><span class="dicgrp-nome">'+sec+'</span><span class="dicgrp-fonte">'+(SECFONTE[sec]||'')+'</span><span class="dicgrp-n">'+itens.length+'</span></summary><div class="dicgrid">'+linhas+'</div></details>';
+  }).join('');
+  box.innerHTML = html || '<div class="mini" style="padding:8px 2px">Nenhum indicador encontrado para “'+q+'”.</div>';
+  const cnt = document.getElementById('dic-count');
+  if(cnt) cnt.textContent = total + ' indicador' + (total===1?'':'es');
 }
 function fmtBRL(v){return 'R$ '+Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
 function tg(el){ el.classList.toggle('on'); }
