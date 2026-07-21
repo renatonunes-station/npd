@@ -129,12 +129,12 @@ h1{font-size:28px;font-weight:400;margin-bottom:8px}                 /* Heading/
 section{margin-bottom:36px}
 .stitle{font-size:18px;font-weight:500;margin-bottom:14px;display:flex;align-items:baseline;gap:12px;color:#fff}   /* Heading/Small */
 .stitle small{font-size:12px;color:var(--mut2);font-weight:400}
-.grid{display:grid;gap:16px}                                          /* Space/500 */
+.grid{display:grid;gap:16px;align-items:start}                        /* Space/500 · cards com altura do conteúdo (sem esticar) */
 .g2{grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr))}
 .g3{grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr))}
 .g4{grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr))}
 .g5{grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr))}
-.row32{display:grid;grid-template-columns:3fr 2fr;gap:16px}
+.row32{display:grid;grid-template-columns:3fr 2fr;gap:16px;align-items:start}
 @media(max-width:760px){.row32{grid-template-columns:1fr}}
 /* ===== Histórico de dossiês ===== */
 .hhead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
@@ -179,7 +179,7 @@ section{margin-bottom:36px}
 .pgbtn[disabled]{opacity:.35;cursor:not-allowed}
 @media(max-width:600px){.htbl{min-width:680px}.histfoot,.histpag{flex-direction:column;align-items:stretch}}
 /* ===== Carteiras e Clientes ===== */
-.cartgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr));gap:14px;margin-top:14px}
+.cartgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr));gap:14px;margin-top:14px;align-items:start}
 .cartcard{border:1px solid var(--line);border-radius:10px;padding:15px 40px 15px 16px;background:var(--card);cursor:pointer;position:relative;transition:.15s;display:flex;flex-direction:column}
 .cartcard:hover{border-color:var(--cyan);background:rgba(127,209,251,.05)}
 .cartcard.sel{border-color:var(--cyan);background:rgba(127,209,251,.10)}
@@ -205,11 +205,11 @@ section{margin-bottom:36px}
 .mrowf{display:flex;gap:10px;flex-wrap:wrap}
 .mrowf .mfield{flex:1;min-width:150px}
 /* metric row: cards de indicador com pouco conteúdo — dimensionados ao conteúdo e alinhados à esquerda, sem esticar até 100% */
-.mrow{display:flex;flex-wrap:wrap;gap:16px;align-items:stretch}
+.mrow{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
 .mrow > .card{flex:1 1 240px;max-width:360px;margin:0}
 @media(max-width:560px){.mrow > .card{max-width:none}}
 /* grade fixa de 4 colunas: cards mantêm 1/4 da largura mesmo com menos itens */
-.g4fix{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
+.g4fix{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
 .g4fix > .card{margin:0}
 @media(max-width:1000px){.g4fix{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.g4fix{grid-template-columns:1fr}}
@@ -298,7 +298,7 @@ section{margin-bottom:36px}
 .polgrp-cat{font-weight:600;color:var(--title);font-size:14px}
 .polgrp-fonte{font-size:11px;color:var(--mut2);border:1px solid var(--line2);border-radius:9999px;padding:2px 9px}
 .polgrp-n{font-size:11px;color:var(--mut);background:rgba(255,255,255,.06);border-radius:9999px;padding:2px 9px;font-weight:600}
-.polcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(360px,100%),1fr));gap:14px}
+.polcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(360px,100%),1fr));gap:14px;align-items:start}
 .polcard{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--card);display:flex;flex-direction:column}
 .polcard-top{display:flex;align-items:flex-start;gap:9px}
 .polcard-top .policon{color:var(--cyan);display:flex;flex-shrink:0;margin-top:2px}
@@ -988,7 +988,10 @@ details.exp summary:hover{color:#fff}
     <div id="carteiras" style="display:none">
       <div class="crumb" style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
         <span>Visão executiva &nbsp;›&nbsp; <b>Carteiras e Clientes</b></span>
-        <button class="btnpri" style="margin:0" onclick="goHome()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="12" x2="12" y2="18"/><line x1="9" y1="15" x2="15" y2="15"/></svg>Novo dossiê</button>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn" style="padding:10px 20px" onclick="carteiraNova()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nova carteira</button>
+          <button class="btnpri" style="margin:0" onclick="goHome()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="12" x2="12" y2="18"/><line x1="9" y1="15" x2="15" y2="15"/></svg>Novo dossiê</button>
+        </div>
       </div>
       <h1>Carteiras e Clientes</h1>
 
@@ -3004,7 +3007,7 @@ function renderCarteirasCards(){
       +`<div class="cc-lbl">Exposição total</div>`
       +`<div class="cc-exp">${histFmtBRL(clExposicaoTotal(k.id))}</div>`
       +arrow+`</div>`;
-  }).join('') + `<div class="cartcard novo" onclick="carteiraNova()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nova</div>`;
+  }).join('');
 }
 function carteiraAbrir(id){
   CL_STATE.carteira=id; CL_STATE.page=1;
