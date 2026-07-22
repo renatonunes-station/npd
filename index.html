@@ -90,6 +90,17 @@ h1{font-size:28px;font-weight:400;margin-bottom:8px}                 /* Heading/
 /* ===== dossiê ===== */
 #dossier{display:none}
 #home{display:none}
+/* ===== login ===== */
+#login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.login-card{width:100%;max-width:400px;background:var(--card);border:1px solid var(--line2);border-radius:16px;padding:40px 36px}
+.login-logo{display:flex;align-items:center;justify-content:center;margin-bottom:36px}
+.login-logo svg{max-width:100%;height:26px;width:auto}
+.login-card h1{font-size:22px;font-weight:400;text-align:center;margin-bottom:6px}
+.login-card .sub{text-align:center;margin:0 0 28px;color:var(--cyan);font-size:13px}
+.login-card .field{width:100%;min-width:0;margin-bottom:14px}
+.login-card .btn{width:100%;text-align:center;margin-top:16px}
+.login-err{color:var(--red);font-size:12.5px;margin-top:12px;text-align:center;display:none}
+.login-foot{text-align:center;margin-top:26px;color:var(--mut2);font-size:11px}
 /* ===== cockpit ===== */
 .kctx{font-size:11px;color:var(--mut2);margin-top:2px}
 .barh{height:8px;border-radius:9999px;background:rgba(255,255,255,.08);overflow:hidden;flex:1}
@@ -97,6 +108,14 @@ h1{font-size:28px;font-weight:400;margin-bottom:8px}                 /* Heading/
 .barrow{display:flex;align-items:center;gap:10px;padding:7px 0}
 .barrow .bl{width:180px;flex-shrink:0;font-size:12.5px;color:var(--mut)}
 .barrow .bv{width:64px;flex-shrink:0;text-align:right;font-size:12.5px;color:#fff;font-weight:500}
+/* barras FIDC: rótulo + valor na linha de cima, barra em largura total embaixo */
+.fbar{padding:7px 0}
+.fbar+.fbar{border-top:1px solid rgba(255,255,255,.05)}
+.fbar-t{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}
+.fbar-l{font-size:12.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.fbar-v{font-size:12.5px;color:#fff;font-weight:600;white-space:nowrap;flex:none}
+.fbar-v .mut{font-weight:400}
+.fbar .barh{width:100%}
 .insight{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px dashed rgba(255,255,255,.08);cursor:pointer}
 .insight:last-child{border-bottom:none}
 .insight:hover .mtx{color:#fff}
@@ -178,16 +197,36 @@ section{margin-bottom:36px}
 .pgbtn.on{background:#fff;color:#10155d;border-color:#fff}
 .pgbtn[disabled]{opacity:.35;cursor:not-allowed}
 @media(max-width:600px){.htbl{min-width:680px}.histfoot,.histpag{flex-direction:column;align-items:stretch}}
+/* ===== Auditoria ===== */
+.audtoolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin-bottom:4px}
+.audtoolbar .field{margin:0;flex:1;min-width:220px}
+.audsel{display:flex;flex-direction:column;gap:4px}
+.audsel label{font-size:11px;color:var(--mut2)}
+.audsel select{background:rgba(255,255,255,.06);border:1px solid var(--line);color:#fff;border-radius:7px;padding:9px 10px;font-size:12.5px;min-width:150px}
+.audcat{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:9999px;white-space:nowrap}
+.audcat::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+.audcat-acesso{background:rgba(127,209,251,.14);color:#7fd1fb}
+.audcat-dossie{background:rgba(159,218,168,.14);color:#9fdaa8}
+.audcat-politica{background:rgba(200,150,250,.16);color:#c896fa}
+.audcat-carteira{background:rgba(120,170,240,.16);color:#8fb4f5}
+.audcat-cliente{background:rgba(120,220,210,.14);color:#7fd8cf}
+.audcat-exportacao{background:rgba(255,255,255,.09);color:var(--mut)}
+.audneg{color:var(--red);font-weight:600;font-size:10px;border:1px solid rgba(245,152,152,.4);border-radius:9999px;padding:1px 7px;margin-left:6px;vertical-align:middle}
+.htbl td .auddet{color:var(--mut);font-size:12px}
+.htbl td .aud-u{color:#fff;font-weight:500}
+.htbl td .aud-r{color:var(--mut2);font-size:11px}
 /* ===== Carteiras e Clientes ===== */
 .cartgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr));gap:14px;margin-top:14px;align-items:start}
-.cartcard{border:1px solid var(--line);border-radius:10px;padding:15px 40px 15px 16px;background:var(--card);cursor:pointer;position:relative;transition:.15s;display:flex;flex-direction:column}
+.cartcard{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--card);cursor:pointer;position:relative;transition:.15s;display:flex;flex-direction:column}
 .cartcard:hover{border-color:var(--cyan);background:rgba(127,209,251,.05)}
 .cartcard.sel{border-color:var(--cyan);background:rgba(127,209,251,.10)}
+.cartcard .cc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;min-height:18px}
 .cartcard .cc-nome{color:var(--title);font-weight:600;font-size:13.5px}
 .cartcard .cc-count{color:#fff;font-size:17px;font-weight:600;margin-top:5px}
 .cartcard .cc-lbl{color:var(--mut2);font-size:11px;margin-top:9px}
 .cartcard .cc-exp{color:var(--mut);font-size:13px;font-weight:500;margin-top:1px}
-.cartcard .cc-arrow{position:absolute;right:14px;top:16px;color:var(--mut2);display:flex}
+.cartcard .cc-arrow{color:var(--mut2);display:flex}
+.cartcard input[type=checkbox]{width:16px;height:16px;accent-color:var(--cyan);cursor:pointer;margin:0}
 .cartcard.novo{align-items:center;justify-content:center;text-align:center;border-style:dashed;color:var(--cyan);font-weight:600;font-size:13px;gap:6px;padding:15px 16px}
 .clbanner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:rgba(127,209,251,.08);border:1px solid rgba(127,209,251,.25);border-radius:8px;padding:10px 14px;margin-top:14px}
 .clbanner b{color:#fff}
@@ -213,6 +252,11 @@ section{margin-bottom:36px}
 .g4fix > .card{margin:0}
 @media(max-width:1000px){.g4fix{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.g4fix{grid-template-columns:1fr}}
+/* detalhamento de indicadores do plano selecionado */
+.plandet{list-style:none;margin-top:8px}
+.plandet li{position:relative;padding:5px 0 5px 18px;font-size:12.5px;color:var(--mut);line-height:1.45;border-bottom:1px dashed rgba(255,255,255,.06)}
+.plandet li:last-child{border-bottom:none}
+.plandet li::before{content:"";position:absolute;left:1px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--cyan)}
 /* Indicadores-chave: no máximo 5 colunas (degradê responsivo) para não apertar o conteúdo */
 #keyind-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
 @media(max-width:1180px){#keyind-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
@@ -579,8 +623,8 @@ details.exp summary:hover{color:#fff}
 @media(max-width:900px){
   .hamb{display:inline-flex}
   .top{padding:14px 16px}
-  .topr{gap:0}
-  .topr > div:not(.avatar){display:none}
+  .topr{gap:10px}
+  .topr > .topmeta{display:none}
   .logo svg{max-width:186px;height:auto}
   .side{position:fixed;top:0;left:0;height:100vh;width:274px;padding-top:16px;background:#05071c;border-right:1px solid var(--line2);transform:translateX(-100%);transition:transform .25s ease;z-index:60;box-shadow:2px 0 26px rgba(0,0,0,.5)}
   .side.open{transform:none}
@@ -636,10 +680,193 @@ details.exp summary:hover{color:#fff}
   details.exp > *:not(summary){display:block!important}
   section{margin-bottom:18px}
 }
+
+/* ===== perfil switcher + notificações + aprovações (dupla aprovação) ===== */
+.perfilsw{position:relative}
+.perfilbtn{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.06);border:1px solid var(--line2);color:#fff;border-radius:9999px;padding:4px 12px 4px 5px;cursor:pointer;font-family:inherit}
+.perfilbtn:hover{background:rgba(255,255,255,.1)}
+.perfilbtn .pav{width:30px;height:30px;border-radius:9999px;background:#fff;color:#10155d;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex:none}
+.perfilbtn .pnm{display:flex;flex-direction:column;line-height:1.25;text-align:left}
+.perfilbtn .pnm b{color:#fff;font-weight:600;font-size:12px}
+.perfilbtn .pnm span{color:var(--cyan);font-size:10.5px}
+.perfilbtn .pcar{color:var(--mut);margin-left:2px}
+.perfilmenu{display:none;position:absolute;right:0;top:calc(100% + 8px);width:262px;background:#0a0e30;border:1px solid var(--line2);border-radius:12px;padding:6px;z-index:80;box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.perfilmenu.open{display:block}
+.perfilmenu .pm-h{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;padding:8px 10px 4px}
+.perfilopt{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;cursor:pointer}
+.perfilopt:hover{background:rgba(255,255,255,.06)}
+.perfilopt .pav{width:30px;height:30px;border-radius:9999px;background:#26305f;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex:none}
+.perfilopt.act .pav{background:#fff;color:#10155d}
+.perfilopt .pom b{color:#fff;font-weight:600;font-size:13px;display:block}
+.perfilopt .pom span{color:var(--mut);font-size:11px}
+.perfilopt .pchk{margin-left:auto;color:var(--cyan);opacity:0}
+.perfilopt.act .pchk{opacity:1}
+.bellwrap{position:relative}
+.bellbtn{background:rgba(255,255,255,.06);border:1px solid var(--line2);color:#fff;width:38px;height:38px;border-radius:9999px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
+.bellbtn:hover{background:rgba(255,255,255,.1)}
+.bellbadge{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 5px;border-radius:9999px;background:var(--red);color:#fff;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #10155d;box-sizing:border-box}
+.bellbadge.hide{display:none}
+.notifpanel{display:none;position:absolute;right:0;top:calc(100% + 8px);width:352px;max-width:88vw;background:#0a0e30;border:1px solid var(--line2);border-radius:12px;z-index:80;box-shadow:0 14px 40px rgba(0,0,0,.5);overflow:hidden}
+.notifpanel.open{display:block}
+.notifhd{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line2)}
+.notifhd b{color:#fff;font-size:13px}
+.notifhd a{color:var(--cyan);font-size:11px;cursor:pointer}
+.notiflist{max-height:392px;overflow-y:auto}
+.notifitem{display:flex;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);cursor:pointer}
+.notifitem:last-child{border-bottom:none}
+.notifitem:hover{background:rgba(255,255,255,.05)}
+.notifitem.unread{background:rgba(127,209,251,.06)}
+.notifdot{width:8px;height:8px;border-radius:9999px;margin-top:5px;flex:none;background:transparent}
+.notifitem.unread .notifdot{background:var(--cyan)}
+.notiftxt b{color:#fff;font-size:12.5px;font-weight:500;display:block;margin-bottom:2px}
+.notiftxt .ntsub{color:var(--mut);font-size:11.5px}
+.notiftime{color:var(--mut2);font-size:10.5px;margin-top:3px;display:block}
+.notifempty{padding:28px 14px;text-align:center;color:var(--mut);font-size:12px}
+.stpill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:9999px;white-space:nowrap}
+.stpill::before{content:"";width:6px;height:6px;border-radius:9999px;background:currentColor;flex:none}
+.st-ger{background:rgba(255,255,255,.07);color:var(--mut2)}
+.st-an{background:var(--ambbg);color:var(--amb)}
+.st-ge{background:var(--grnbg);color:var(--grn)}
+.st-rep{background:var(--redbg);color:var(--red)}
+.st-rev{background:rgba(127,209,251,.12);color:var(--cyan)}
+.aprcard{display:flex;justify-content:space-between;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line2);border-radius:12px;padding:14px 16px;margin-bottom:10px;flex-wrap:wrap}
+.aprcard .ac-l b{color:#fff;font-size:14.5px;font-weight:600}
+.aprcard .ac-l .acfidc{font-size:11.5px;color:var(--cyan);font-weight:600;margin-bottom:2px}
+.fidcbox{display:flex;align-items:center;gap:12px;background:rgba(127,209,251,.06);border:1px solid var(--line2);border-radius:12px;padding:12px 14px;margin-bottom:14px;flex-wrap:wrap}
+.fidcbox .fbic{width:38px;height:38px;border-radius:10px;background:#141a44;display:flex;align-items:center;justify-content:center;color:var(--cyan);flex:none}
+.fidcbox .fbnm b{color:#fff;font-size:14px;font-weight:600;display:block}
+.fidcbox .fbnm span{color:var(--mut);font-size:11.5px}
+.fidcbox .fbtag{margin-left:auto;text-align:right}
+.aprcard .ac-l .acsub{color:var(--mut);font-size:12px;margin-top:3px}
+.aprcard .ac-r{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.aprcard .acval{color:#fff;font-weight:600;font-size:14px;text-align:right}
+.aprcard .acval span{display:block;color:var(--mut);font-size:11px;font-weight:400}
+.aprsla{font-size:11px;font-weight:600;padding:3px 9px;border-radius:9999px;white-space:nowrap}
+.aprsla.ok{background:var(--grnbg);color:var(--grn)} .aprsla.warn{background:var(--ambbg);color:var(--amb)} .aprsla.late{background:var(--redbg);color:var(--red)}
+/* versão compacta das solicitações no cockpit */
+.aprcompact{padding:10px 14px;margin-bottom:6px}
+.apchdr{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:12.5px;color:var(--mut);padding-bottom:4px}
+.apchdr b{color:#fff;font-size:14px}
+.lnkbtn{background:none;border:none;color:var(--cyan);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;padding:4px 2px}
+.lnkbtn:hover{text-decoration:underline}
+.aprmini{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid rgba(255,255,255,.06);cursor:pointer}
+.aprmini.nolink{cursor:default}
+.aprmini .am-l{min-width:0}
+.aprmini .am-l b{color:#fff;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.aprmini .am-l span{color:var(--mut);font-size:11px}
+.aprmini .am-r{display:flex;align-items:center;gap:10px;flex:none}
+.aprmini .am-v{color:#fff;font-size:12.5px;font-weight:600;white-space:nowrap}
+.apcfoot{text-align:center;color:var(--mut);font-size:11px;padding-top:8px}
+.revbox{background:var(--card);border:1px solid var(--line2);border-radius:14px;padding:20px 22px;margin-bottom:16px}
+.revgrid{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start}
+@media(max-width:820px){.revgrid{grid-template-columns:1fr}}
+.tline{list-style:none;padding:0;margin:8px 0 0}
+.tline li{position:relative;padding:0 0 16px 22px;border-left:2px solid var(--line2)}
+.tline li:last-child{border-left-color:transparent;padding-bottom:0}
+.tline li::before{content:"";position:absolute;left:-6px;top:2px;width:10px;height:10px;border-radius:9999px;background:var(--cyan)}
+.tline li.done::before{background:var(--grn)} .tline li.rej::before{background:var(--red)} .tline li.wait::before{background:var(--mut)}
+.tline .tl-t{color:#fff;font-size:13px;font-weight:500}
+.tline .tl-m{color:var(--mut);font-size:11.5px;margin-top:2px}
+.gactions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.gbtn{border:none;border-radius:8px;padding:11px 20px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:7px}
+.gbtn.apr{background:#57c98a;color:#06231a} .gbtn.rep{background:#ef6d6d;color:#2a0b0b} .gbtn.info{background:rgba(255,255,255,.09);color:#fff;border:1px solid var(--line2)}
+.gbtn:hover{filter:brightness(1.08)}
+.gbtn:disabled{opacity:.5;cursor:not-allowed;filter:none}
+.aprbanner{background:rgba(127,209,251,.08);border:1px solid var(--line2);border-radius:12px;padding:16px 18px;color:var(--mut);font-size:13px;display:flex;gap:12px;align-items:flex-start}
+.aprbanner b{color:#fff}
+.suggbtn{background:rgba(127,209,251,.12);border:1px solid var(--line2);color:var(--cyan);border-radius:7px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px}
+.suggbtn:hover{background:rgba(127,209,251,.2)}
+/* ===== tela de login ===== */
+.loginbg{position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;padding:8vh 20px 20px;overflow-y:auto;background:radial-gradient(1100px 760px at 82% -5%, rgba(66,96,210,.38), transparent 60%), radial-gradient(900px 700px at 6% 105%, rgba(38,56,130,.35), transparent 60%), #0a0e2a}
+.loginbg.hide{display:none}
+.loginlogo{margin-bottom:30px}
+.loginlogo svg{height:30px;width:auto}
+.loginbox{width:100%;max-width:520px;display:flex;flex-direction:column;align-items:center}
+.loginttl{color:var(--cyan);font-size:21px;font-weight:400;margin:0 0 28px;text-align:center}
+.loginfield{position:relative;width:100%;margin-bottom:16px}
+.loginfield .ic{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--mut);display:flex}
+.loginfield input{width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:12px;color:#fff;padding:16px 46px;font-size:15px;font-family:inherit;outline:none}
+.loginfield input::placeholder{color:var(--mut)}
+.loginfield input:focus{border-color:var(--cyan)}
+.loginfield .eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--mut);cursor:pointer;padding:6px}
+.loginrow{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:10px;flex-wrap:wrap}
+.loginforgot{color:#fff;font-size:13px;font-weight:600;cursor:pointer}
+.loginforgot:hover{color:var(--cyan)}
+.loginacts{display:flex;gap:12px;flex-wrap:wrap}
 </style>
 </head>
 <body>
 
+<div id="login">
+  <div class="login-card">
+    <div class="login-logo"><svg width="230" height="24" viewBox="0 0 230 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_login_8871)">
+<mask id="mask0_login_8871" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="24">
+<path d="M64 0H0V24H64V0Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_login_8871)">
+<path d="M53.5118 0H46.0394V20.8487L40.494 0H33.8128L31.5663 8.44478L29.3199 0H22.6386L18.4288 15.8257C18.0623 14.2062 17.0316 12.8134 15.2206 11.9909C17.3727 10.7333 17.9788 8.10114 17.9788 6.49627C17.9788 2.84783 15.1081 0 9.54828 0H0V24H9.96564C13.0105 24 15.1372 23.1884 16.6287 21.8358C16.7231 21.7481 16.8175 21.6567 16.9046 21.5653L16.2586 24H22.9398L25.9847 12.5575L28.2311 21.0023H34.9124L37.1588 12.5575L40.2037 24H52.002V16.9992H53.519C60.1023 16.9992 64.0073 13.5738 64.0073 8.60929C64.0073 3.64478 60.4434 0 53.5118 0ZM5.95543 5.00107H9.35594C11.3048 5.00107 12.2955 6.05027 12.2955 7.35902C12.2955 8.66778 11.3048 9.74989 9.29424 9.74989H5.95543V5.00107ZM9.45393 18.9989H5.95906V13.9979H9.51925C11.5008 13.9979 12.6802 15.0032 12.6802 16.4984C12.6802 17.9936 11.5951 18.9989 9.45393 18.9989ZM54.2703 12.0018H51.9948V5.00107H54.2703C56.6038 5.00107 58.2043 6.25499 58.2043 8.49962C58.2043 10.7442 56.5675 11.9982 54.2703 11.9982" fill="white"/>
+</g>
+<mask id="mask1_login_8871" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="16" y="0" width="14" height="24">
+<path d="M22.6422 0L16.2549 24H22.9361L29.3198 0H22.6422Z" fill="white"/>
+</mask>
+<g mask="url(#mask1_login_8871)">
+<path d="M29.3198 0H16.2549V24H29.3198V0Z" fill="url(#paint0_linear_login_8871)"/>
+</g>
+<mask id="mask2_login_8871" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="28" y="0" width="13" height="22">
+<path d="M33.8128 0L28.2275 21.0023H34.9088L40.4941 0H33.8128Z" fill="white"/>
+</mask>
+<g mask="url(#mask2_login_8871)">
+<path d="M40.4941 0H28.2275V21.0023H40.4941V0Z" fill="url(#paint1_linear_login_8871)"/>
+</g>
+</g>
+<g clip-path="url(#clip1_login_8871)">
+<path d="M106.767 11.3838C106.018 10.0447 105.281 8.69766 104.526 7.36064C104.374 7.09123 104.266 6.73938 103.857 6.73737C102.884 6.73134 101.913 6.73737 100.895 6.73737C100.946 6.84192 100.97 6.8962 100.999 6.94848C101.958 8.71576 102.914 10.483 103.875 12.2463C104.376 13.1671 104.893 14.0799 105.379 15.0088C105.442 15.1314 105.416 15.3506 105.346 15.4813C104.453 17.1259 103.547 18.7625 102.637 20.3971C102.507 20.6323 102.35 20.8535 102.149 21.1732C102.033 21.0143 101.97 20.8977 101.88 20.8072C100.94 19.8462 100.002 18.8831 99.0511 17.9321C96.3746 15.2561 93.694 12.5841 91.0134 9.91204C90.0303 8.9329 89.0391 7.95778 88.0479 6.98668C87.9706 6.91229 87.8627 6.82583 87.765 6.82181C86.845 6.78361 85.923 6.75546 85.003 6.74742C84.8788 6.74742 84.6957 6.84594 84.6346 6.9525C83.7859 8.45036 82.9514 9.95627 82.1148 11.4622C81.5327 12.5097 80.9587 13.5592 80.3685 14.6027C80.2789 14.7615 80.1222 14.8841 79.998 15.057C79.998 15.2239 79.998 15.3566 80.0265 15.4893C80.1405 15.5898 80.2423 15.6803 80.3074 15.7909C80.6921 16.4624 81.0625 17.142 81.4493 17.8115C82.1372 18.9997 82.8333 20.184 83.5233 21.3682C83.9385 22.0799 84.3476 22.7937 84.771 23.5014C84.8198 23.5838 84.9297 23.6843 85.0132 23.6864C86.0451 23.6984 87.077 23.6944 88.1191 23.6944C87.7243 22.9666 87.305 22.2046 86.8938 21.4345C85.8416 19.4642 84.7974 17.4898 83.737 15.5215C83.6291 15.3204 83.623 15.1837 83.7411 14.9847C84.7486 13.2616 85.7418 11.5305 86.7432 9.80548C86.8654 9.59638 87.0099 9.66474 87.1483 9.81352C87.5065 10.1995 87.8647 10.5876 88.2352 10.9615C89.6558 12.3971 91.0826 13.8266 92.5053 15.2601C93.5617 16.3257 94.6119 17.3973 95.6703 18.4609C97.3414 20.1417 99.0124 21.8206 100.692 23.4933C100.789 23.5898 100.948 23.6803 101.078 23.6823C102.07 23.6984 103.063 23.6964 104.056 23.6823C104.166 23.6823 104.323 23.5939 104.376 23.5014C104.88 22.6248 105.371 21.7401 105.859 20.8555C106.25 20.1458 106.631 19.43 107.019 18.7183C107.628 17.6004 108.243 16.4866 108.845 15.3667C108.888 15.2883 108.886 15.1495 108.845 15.0711C108.159 13.8387 107.459 12.6162 106.769 11.3858L106.767 11.3838Z" fill="white"/>
+<path d="M204.2 12.9098C203.795 11.0359 202.995 9.36115 201.519 8.04222C200.595 7.21388 199.512 6.69515 198.342 6.3614C197.471 6.11209 196.573 5.89093 195.674 5.82659C194.467 5.74014 193.243 5.75421 192.037 5.84469C191.253 5.90299 190.481 6.15632 189.712 6.35336C188.375 6.69515 187.154 7.29028 186.114 8.18497C185.122 9.03745 184.339 10.0508 183.822 11.2651C183.378 12.3066 183.124 13.3843 183.075 14.5001C183.048 15.0772 183.144 15.6622 183.221 16.2393C183.435 17.8135 184.107 19.2028 185.124 20.4071C186.248 21.7381 187.683 22.6891 189.356 23.2078C190.327 23.5094 191.353 23.6361 192.352 23.8492C192.423 23.8653 192.482 23.9477 192.582 24C193.795 24 194.974 24 196.128 23.9719C196.183 23.9115 196.258 23.8633 196.341 23.8472C197.05 23.7145 197.774 23.6401 198.466 23.4471C200.516 22.8721 202.262 21.8387 203.432 20.0151C203.738 19.5366 204.008 19.0359 204.076 18.4267C203.268 18.4267 202.5 18.4187 201.731 18.4308C201.448 18.4348 201.263 18.5795 201.09 18.8329C200.813 19.239 200.504 19.6612 200.111 19.9467C198.46 21.149 196.543 21.6155 194.532 21.7502C193.463 21.8226 192.401 21.706 191.363 21.4426C189.045 20.8535 187.227 19.6391 186.329 17.3491C186.071 16.6896 185.867 16.006 185.888 15.2481H204.438C204.363 14.4418 204.365 13.6597 204.202 12.9098H204.2ZM201.401 13.1128H186.012C186.484 11.7577 187.207 10.666 188.298 9.79342C189.203 9.06962 190.213 8.60518 191.334 8.34984C192.45 8.09651 193.573 7.94773 194.721 8.12667C195.338 8.22317 195.959 8.2855 196.577 8.3619C197.554 8.58507 198.415 8.91883 199.193 9.44559C200.447 10.292 201.147 11.4823 201.401 12.946C201.411 13.0063 201.401 13.0706 201.401 13.1149V13.1128Z" fill="white"/>
+<path d="M229.977 22.7836C229.916 22.7555 229.859 22.7052 229.855 22.6509C229.796 21.8909 229.707 21.1289 229.701 20.3669C229.682 17.8397 229.701 15.3104 229.686 12.7831C229.682 12.2805 229.623 11.7718 229.532 11.2772C229.192 9.41945 228.127 8.07037 226.477 7.15959C224.836 6.25484 223.029 5.92511 221.191 5.82458C219.583 5.73611 217.969 5.76828 216.375 6.11008C214.897 6.42573 213.481 6.88414 212.221 7.7145C211.177 8.40211 210.342 9.28474 209.939 10.5313C210.841 10.5313 211.716 10.5192 212.589 10.5373C212.86 10.5434 213.015 10.4328 213.159 10.2337C213.67 9.52601 214.344 8.99724 215.131 8.6293C216.314 8.0764 217.6 7.92762 218.881 7.91757C220.061 7.90751 221.256 7.97587 222.422 8.15079C223.865 8.36793 225.162 8.94898 226.071 10.1634C226.77 11.0942 226.969 12.1679 227.036 13.2777C226.389 13.3179 225.784 13.3662 225.18 13.3923C223.822 13.4506 222.463 13.4908 221.105 13.5511C220.177 13.5914 219.249 13.6436 218.323 13.706C217.35 13.7723 216.377 13.8628 215.404 13.9352C214.325 14.0136 213.259 14.1503 212.249 14.5564C211.101 15.0188 210.114 15.6763 209.577 16.8324C209.143 17.7633 209.141 18.7283 209.306 19.7336C209.593 21.4727 210.56 22.6107 212.203 23.2259C213.118 23.5697 214.061 23.7949 215.044 23.8512C215.099 23.8552 215.148 23.9477 215.235 24H219.823C219.888 23.9477 219.947 23.8593 220.016 23.8512C221.48 23.6542 222.849 23.2078 224.148 22.4941C225.196 21.9171 226.108 21.1832 226.985 20.2966C227.008 20.4373 227.03 20.5157 227.03 20.5941C227.032 21.4707 227.042 22.3473 227.026 23.2239C227.02 23.5758 227.156 23.7024 227.508 23.6944C228.319 23.6783 229.127 23.6904 229.973 23.6542C230.01 23.3325 230.01 23.047 229.981 22.7836H229.977ZM224.413 20.1498C223.114 20.8856 221.759 21.4205 220.295 21.6637C219.007 21.8789 217.704 21.905 216.399 21.7602C215.477 21.6597 214.559 21.5511 213.723 21.1309C211.838 20.186 211.694 18.1734 212.872 16.7499C213.275 16.2634 213.882 16.0422 214.505 15.9517C215.716 15.7768 216.931 15.618 218.146 15.4873C218.94 15.4029 219.739 15.3747 220.535 15.3265C221.064 15.2943 221.594 15.2742 222.123 15.2481C223.609 15.1958 225.019 15.1475 226.43 15.0892C226.615 15.0812 226.8 15.0309 226.991 14.9987C227.02 17.0294 226.647 18.8811 224.413 20.1458V20.1498Z" fill="white"/>
+<path d="M133.827 6.98869H130.551V7.3908C130.551 10.3704 130.553 13.3501 130.546 16.3317C130.546 16.6595 130.51 16.9912 130.469 17.3169C130.274 18.9053 129.382 20.0191 127.982 20.7409C126.716 21.3943 125.316 21.5713 123.919 21.5793C122.849 21.5833 121.768 21.4607 120.714 21.2717C119.767 21.1028 118.884 20.6906 118.173 20.0151C117.192 19.0822 116.789 17.8779 116.771 16.5851C116.726 13.515 116.757 10.4448 116.757 7.37472V6.98467H113.466V7.37673C113.466 10.1252 113.456 12.8716 113.474 15.62C113.478 16.3679 113.523 17.1219 113.635 17.8618C113.82 19.0842 114.363 20.1679 115.192 21.0887C116.743 22.8118 118.79 23.5396 121.033 23.8512C121.102 23.8613 121.161 23.9497 121.261 24C122.944 24 124.593 24 126.217 23.9719C126.272 23.9115 126.348 23.8633 126.431 23.8472C126.989 23.7386 127.559 23.6723 128.106 23.5275C129.71 23.1073 131.147 22.4036 132.256 21.1249C133.292 19.9306 133.793 18.5172 133.823 16.9952C133.891 13.7582 133.844 10.5192 133.844 7.28223C133.844 7.18372 133.834 7.0852 133.829 6.98869H133.827Z" fill="white"/>
+<path d="M156.119 18.2016C156.034 18.2016 155.901 18.294 155.875 18.3704C155.519 19.3858 154.761 20.0271 153.843 20.5137C152.356 21.3018 150.717 21.4285 149.081 21.5109C148.497 21.5391 147.904 21.4426 147.32 21.3642C145.513 21.1229 143.97 20.3971 142.85 18.9213C141.78 17.5099 141.261 15.9035 141.631 14.1845C142.142 11.812 143.667 10.2076 145.981 9.3712C147.432 8.84645 148.932 8.82232 150.455 8.97311C151.444 9.06962 152.413 9.22845 153.331 9.60644C154.527 10.099 155.551 10.7886 155.987 12.0653H159.017C158.997 11.9507 158.989 11.8542 158.958 11.7618C158.384 9.95828 157.155 8.69565 155.504 7.83313C153.77 6.92838 151.871 6.60066 149.936 6.5142C148.7 6.45791 147.465 6.49209 146.233 6.7233C144.878 6.97864 143.595 7.41091 142.47 8.18497C141.094 9.12792 140.038 10.3624 139.411 11.9226C138.814 13.4084 138.523 14.9203 138.855 16.5248C139.28 18.5775 140.217 20.3207 141.827 21.708C143.213 22.9022 144.821 23.5818 146.624 23.8512C146.681 23.8593 146.728 23.9497 146.815 24C148.368 24 149.887 24 151.379 23.9719C151.407 23.9115 151.456 23.8593 151.513 23.8492C152.111 23.7406 152.718 23.6723 153.308 23.5295C154.829 23.1596 156.229 22.5222 157.336 21.4064C157.802 20.9379 158.195 20.377 158.519 19.8C158.785 19.3275 158.899 18.7705 159.101 18.1935C158.026 18.1935 157.074 18.1895 156.123 18.2016H156.119Z" fill="white"/>
+<path d="M123.811 3.03996C123.919 3.49837 124.029 3.95677 124.135 4.40111C124.33 4.36693 124.491 4.34481 124.65 4.31063C126.032 4.01106 127.41 3.70344 128.792 3.40789C130.383 3.06811 131.977 2.72832 133.573 2.40664C133.852 2.35034 133.854 2.23172 133.803 2.01056C133.65 1.34305 133.514 0.669515 133.335 0C133.035 0 132.771 0 132.533 0.0261372C132.382 0.112591 132.211 0.191003 132.032 0.229203C130.772 0.496607 129.51 0.749937 128.248 1.01734C126.815 1.31892 125.386 1.63659 123.954 1.93013C123.691 1.98442 123.614 2.11108 123.658 2.34632C123.705 2.57954 123.756 2.81076 123.811 3.03996Z" fill="white"/>
+<path d="M167.376 6.83388H164.722V23.6703H180.14V21.2797H167.374V6.83388H167.376Z" fill="white"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_login_8871" x1="22.3787" y1="0.0270526" x2="22.3787" y2="24.0271" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="#4BBEF8"/>
+</linearGradient>
+<linearGradient id="paint1_linear_login_8871" x1="33.3112" y1="21.1661" x2="33.3112" y2="0.163777" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="#A664FA"/>
+</linearGradient>
+<clipPath id="clip0_login_8871">
+<rect width="64" height="24" fill="white"/>
+</clipPath>
+<clipPath id="clip1_login_8871">
+<rect width="150" height="24" fill="white" transform="translate(80)"/>
+</clipPath>
+</defs>
+</svg></div>
+    <div class="field">
+      <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
+      <div class="fw">
+        <label>E-mail</label>
+        <input type="email" id="login-email" value="marina.costa@nuclea.com.br" onkeydown="if(event.key==='Enter')fazerLogin()">
+      </div>
+    </div>
+    <div class="field">
+      <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+      <div class="fw">
+        <label>Senha</label>
+        <input type="password" id="login-senha" value="nuclea@2026" onkeydown="if(event.key==='Enter')fazerLogin()">
+      </div>
+    </div>
+    <div class="login-err" id="login-err">E-mail ou senha inválidos.</div>
+    <button class="btn" onclick="fazerLogin()">Entrar</button>
+    <div class="login-foot">Acesso restrito · BMP × Núclea</div>
+  </div>
+</div>
+
+<div id="app" style="display:none">
 <div class="top">
   <div class="logo"><button class="hamb" onclick="toggleSide()" aria-label="Abrir menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><svg width="230" height="24" viewBox="0 0 230 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_452_8871)">
@@ -689,9 +916,29 @@ details.exp summary:hover{color:#fff}
 </defs>
 </svg></div>
   <div class="topr">
-    <div><span class="lbl">Usuário</span><b>Analista de Crédito</b></div>
-    <div><span class="lbl">Último acesso</span><b id="dt">02/07/2026 | 09h40</b></div>
-    <div class="avatar">AC</div>
+    <div class="topmeta"><span class="lbl">Último acesso</span><b id="dt">21/07/2026 | 09h40</b></div>
+    <div class="bellwrap">
+      <button class="bellbtn" onclick="toggleNotif(event)" aria-label="Notificações">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="bellbadge hide" id="bell-badge">0</span>
+      </button>
+      <div class="notifpanel" id="notifpanel">
+        <div class="notifhd"><b>Notificações</b><a onclick="marcarTodasLidas()">Marcar todas como lidas</a></div>
+        <div class="notiflist" id="notif-list"></div>
+      </div>
+    </div>
+    <div class="perfilsw">
+      <button class="perfilbtn" onclick="togglePerfilMenu(event)">
+        <span class="pav" id="perfil-ini">WS</span>
+        <span class="pnm"><b id="perfil-nome">Waldick Soriano</b><span id="perfil-cargo">Asset Manager</span></span>
+        <span class="pcar"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </button>
+      <div class="perfilmenu" id="perfilmenu">
+        <div class="pm-h">Alternar perfil (protótipo)</div>
+        <div class="perfilopt" id="perfilopt-gestor" onclick="setPerfil('gestor')"><span class="pav">WS</span><span class="pom"><b>Waldick Soriano</b><span>Asset Manager</span></span><span class="pchk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+        <div class="perfilopt" id="perfilopt-analista" onclick="setPerfil('analista')"><span class="pav">MC</span><span class="pom"><b>Marina Costa</b><span>Analista de crédito</span></span><span class="pchk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -699,22 +946,25 @@ details.exp summary:hover{color:#fff}
 <div class="wrap">
   <div class="side">
     <h5>Visão executiva</h5>
-    <a class="on" id="nav-cockpit" onclick="goCockpit()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg> Cockpit do Gestor</a>
-    <a id="nav-cockpit-an" onclick="goCockpitAnalista()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Cockpit do Analista</a>
-    <a id="nav-cart" onclick="goCarteiras()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Carteiras e Clientes</a>
+    <a class="on" id="nav-cockpit" onclick="goCockpit()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg> Cockpit</a>
+    <a id="nav-cockpit-an" style="display:none" onclick="goCockpitAnalista()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Cockpit</a>
+    <a id="nav-cart" onclick="goCarteiras()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span id="nav-cart-label">Carteiras e Clientes</span></a>
+    <a id="nav-aprov" onclick="goAprovacoes()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> Comitê <span id="nav-aprov-badge" class="bellbadge hide" style="position:static;margin-left:auto;border:none">0</span></a>
     <h5>Operação</h5>
     <a id="nav-novo" onclick="goHome()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="12" x2="12" y2="18"/><line x1="9" y1="15" x2="15" y2="15"/></svg> Novo dossiê</a>
     <div id="subnav" style="display:none">
       <a class="sub" onclick="navTo('sec-parecer')">Parecer preliminar</a>
-      <a class="sub" onclick="navTo('sec-bureaus')">Bureaus e Restrições</a>
+      <a class="sub" onclick="navTo('sec-bureaus')">Restrições</a>
       <a class="sub" onclick="navTo('sec-scores')">Score e Saúde financeira</a>
       <a class="sub" onclick="navTo('sec-scr')">Central SCR</a>
       <a class="sub" onclick="navTo('sec-risco')">Risco e Liquidez</a>
       <a class="sub" onclick="navTo('sec-estrutura')">Estrutura e Cadastro</a>
     </div>
     <a id="nav-hist" onclick="goHistorico()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg> Histórico de dossiês</a>
-    <h5>Gestão</h5>
+    <a id="nav-mon" onclick="goMonitoramento()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Monitoramento</a>
+    <h5 id="side-gestao">Gestão</h5>
     <a id="nav-pol" onclick="goPolicy()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg> Política de risco</a>
+    <a id="nav-aud" onclick="goAuditoria()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg> Auditoria</a>
     <div class="ver">v.1.2 · protótipo</div>
   </div>
 
@@ -722,80 +972,81 @@ details.exp summary:hover{color:#fff}
 
     <!-- ================= TELA 0 : COCKPIT DO GESTOR ================= -->
     <div id="cockpit">
-      <div class="crumb">Visão executiva &nbsp;›&nbsp; <b>Cockpit do Gestor</b></div>
+      <div class="crumb">Visão executiva &nbsp;›&nbsp; <b>Cockpit do gestor</b></div>
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:4px">
         <div>
-          <h1>Cockpit do Gestor</h1>
-          <div class="sub" id="ck-sub">Carregando carteira…</div>
+          <h1>Cockpit do gestor</h1>
+          <div class="sub" id="ckf-sub">Carregando portfólio…</div>
         </div>
         <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-          <select class="fsel" id="ck-filtro-carteira" style="width:auto;min-width:220px;padding:8px 10px;font-size:13px" onchange="ckGestorFiltrar()">
-            <option value="all">Toda a operação</option>
-            <!-- opções de carteira preenchidas via JS -->
+          <select class="fsel" id="ckf-filtro" style="width:auto;min-width:240px;padding:8px 10px;font-size:13px" onchange="ckfFiltrar()">
+            <option value="all">Todos os FIDCs</option>
           </select>
-          <button class="btn" onclick="goHome()">Novo dossiê <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
         </div>
       </div>
+      <div class="mini" style="margin-bottom:14px">Visão consolidada da carteira de FIDCs sob gestão. Cada FIDC é um cliente da asset; os cedentes de cada fundo são geridos pelos analistas.</div>
 
-      <div class="subhdr">Pulso da carteira</div>
-      <div class="grid g4" id="ck-kpis" style="margin-bottom:16px"></div>
+      <div id="ck-aprov-sec"></div>
 
-      <div class="subhdr">Insights estratégicos por segmento <span class="info" data-tip="Cruza cada indicador-chave dos dossiês (Bureaus e Restrições, Score, Central SCR, Risco e Liquidez, Estrutura e Cadastro) por setor e por UF, comparando a taxa de incidência do segmento contra a média da carteira no recorte atual. Mostrado apenas para segmentos com pelo menos 3 cedentes e desvio relevante (≥15 p.p.)."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+      <div class="subhdr">Pulso do portfólio</div>
+      <div class="grid g4" id="ckf-kpis" style="margin-bottom:16px"></div>
+
+      <div class="subhdr">Leitura estratégica do portfólio <span class="info" data-tip="Sinais gerados pela IA cruzando os indicadores de cada FIDC (PL, inadimplência, subordinação vs. mínimo do regulamento, rentabilidade e concentração), comparando cada fundo contra a média do portfólio."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
       <div class="grid g2" style="align-items:start;margin-bottom:16px">
         <div>
-          <h4 style="margin-bottom:6px">Sinais de risco concentrado</h4>
-          <div class="card"><ul class="motlist" id="ck-insights-risco"></ul></div>
+          <h4 style="margin-bottom:6px">Sinais de risco por FIDC</h4>
+          <div class="card"><ul class="motlist" id="ckf-insights-risco"></ul></div>
         </div>
         <div>
-          <h4 style="margin-bottom:6px">Oportunidades de originação</h4>
-          <div class="card"><ul class="motlist" id="ck-insights-oport"></ul></div>
+          <h4 style="margin-bottom:6px">Oportunidades no portfólio</h4>
+          <div class="card"><ul class="motlist" id="ckf-insights-oport"></ul></div>
         </div>
       </div>
 
       <div class="grid g2" style="align-items:start">
         <div>
-          <div class="subhdr">Radar de atenção <span class="info" data-tip="Itens que exigem decisão do gestor agora, gerados pela IA cruzando todos os dossiês da carteira: gargalos operacionais, gates disparados, deterioração pós-aprovação e divergências entre a IA e o analista."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
-          <div class="card"><ul class="motlist" id="ck-radar"></ul></div>
+          <div class="subhdr">Radar de atenção <span class="info" data-tip="FIDCs que exigem decisão do gestor agora: subordinação no piso ou abaixo do mínimo do regulamento, inadimplência acima do apetite, concentração elevada e solicitações no comitê."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+          <div class="card"><ul class="motlist" id="ckf-radar"></ul></div>
         </div>
         <div>
-          <div class="subhdr">Funil operacional</div>
-          <div class="card"><div class="funnelwrap" id="ck-funil"></div></div>
+          <div class="subhdr">Ranking de FIDCs por exposição</div>
+          <div class="card"><div id="ckf-ranking"></div></div>
         </div>
       </div>
 
-      <div class="subhdr" style="margin-top:20px">Composição e Concentração da carteira <span class="info" data-tip="Como a carteira em análise/aprovada se distribui por setor, UF e faixa de risco — sinalizando concentração acima dos limiares definidos na Política de risco."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+      <div class="subhdr" style="margin-top:20px">Composição do portfólio <span class="info" data-tip="Como o patrimônio sob gestão se distribui entre os FIDCs, por tipo/classe de operação e por situação de risco de cada fundo."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
       <div class="grid g3" style="margin-bottom:16px">
-        <div class="card"><h4>Por setor (CNAE)</h4><div class="src">% do valor solicitado na carteira ativa</div><div id="ck-setor"></div></div>
-        <div class="card"><h4>Por UF</h4><div class="src">% do valor solicitado na carteira ativa</div><div id="ck-uf"></div></div>
-        <div class="card"><h4>Por faixa de risco</h4><div class="src">% de dossiês decididos, por classificação</div><div id="ck-risco"></div></div>
+        <div class="card"><h4>Por FIDC</h4><div class="src">% do PL consolidado sob gestão</div><div id="ckf-porfidc"></div></div>
+        <div class="card"><h4>Por tipo de operação</h4><div class="src">% do PL por classe de recebível</div><div id="ckf-classe"></div></div>
+        <div class="card"><h4>Por situação de risco</h4><div class="src">nº de FIDCs por status</div><div id="ckf-status"></div></div>
       </div>
 
-      <div class="subhdr" style="margin-top:20px">Distribuição da carteira <span class="info" data-tip="Como os cedentes desta carteira se distribuem por faixa de score, o quanto a exposição aprovada está concentrada nos maiores nomes, e há quanto tempo os dossiês em análise estão parados."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+      <div class="subhdr" style="margin-top:20px">Indicadores de risco por FIDC <span class="info" data-tip="Comparativo dos fundos nos três eixos que o gestor monitora: inadimplência da carteira, razão de subordinação frente ao mínimo do regulamento e rentabilidade entregue à cota."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
       <div class="grid g3" style="margin-bottom:16px">
-        <div class="card"><h4>Por faixa de score</h4><div class="src">% de cedentes na carteira exibida</div><div id="ck-faixascore"></div></div>
-        <div class="card"><h4>Concentração de risco</h4><div class="src">participação dos maiores cedentes na exposição aprovada</div><div id="ck-concentracao"></div></div>
-        <div class="card"><h4>Aging da carteira em análise</h4><div class="src">dias desde a geração do dossiê, sem parecer registrado</div><div id="ck-aging"></div></div>
+        <div class="card"><h4>Inadimplência</h4><div class="src">% da carteira vencida +90d por FIDC</div><div id="ckf-inad"></div></div>
+        <div class="card"><h4>Subordinação vs. mínimo</h4><div class="src">razão de subordinação atual e piso do regulamento</div><div id="ckf-subord"></div></div>
+        <div class="card"><h4>Rentabilidade</h4><div class="src">% do CDI entregue à cota sênior</div><div id="ckf-rent"></div></div>
       </div>
 
       <div class="grid g2" style="align-items:start">
         <div>
-          <div class="subhdr">Tendência do score médio da carteira</div>
-          <div class="card" id="ck-tendencia"></div>
+          <div class="subhdr">Tendência do PL sob gestão</div>
+          <div class="card" id="ckf-tend"></div>
         </div>
         <div>
-          <div class="subhdr">Carteira viva — monitoramento pós-aprovação <span class="info" data-tip="Cedentes já aprovados cujas reconsultas mensais (SCR/NÚCLEA) mostraram queda de score desde a aprovação — a vigilância contínua da carteira, não só a foto do momento da análise."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
-          <div class="card"><div id="ck-monitor"></div></div>
+          <div class="subhdr">Enquadramento e alertas regulatórios <span class="info" data-tip="FIDCs cuja subordinação está abaixo do mínimo do regulamento ou cuja inadimplência ultrapassou o gatilho de reforço — exigem ação junto ao administrador/custodiante."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+          <div class="card"><div id="ckf-enq"></div></div>
         </div>
       </div>
 
       <div class="grid g2" style="align-items:start;margin-top:20px">
         <div>
-          <div class="subhdr">Consumo e Custo de dados</div>
-          <div class="card" id="ck-custo"></div>
+          <div class="subhdr">Consumo e custo de dados (consolidado)</div>
+          <div class="card" id="ckf-custo"></div>
         </div>
         <div>
-          <div class="subhdr">Calibração do modelo <span class="info" data-tip="Quantas vezes a decisão final do analista divergiu da classificação de risco sugerida pela IA — sinaliza quando vale revisar pesos e limiares da Política de risco."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
-          <div class="card" id="ck-calibracao"></div>
+          <div class="subhdr">Comitê — decisões recentes <span class="info" data-tip="Últimas deliberações do comitê de crédito em última instância sobre os créditos encaminhados pelos FIDCs."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+          <div class="card" id="ckf-comite"></div>
         </div>
       </div>
     </div>
@@ -816,10 +1067,12 @@ details.exp summary:hover{color:#fff}
       </div>
       <div class="mini" style="margin-bottom:16px">Simulação de login neste protótipo — o seletor de analista acima substitui a sessão autenticada. Em produção, o Cockpit do Analista é restrito automaticamente às carteiras do usuário logado.</div>
 
+      <div id="cka-aprov-sec"></div>
+
       <div class="subhdr">Pulso da carteira</div>
       <div class="grid g4" id="cka-kpis" style="margin-bottom:16px"></div>
 
-      <div class="subhdr">Insights estratégicos por segmento <span class="info" data-tip="Cruza cada indicador-chave dos dossiês (Bureaus e Restrições, Score, Central SCR, Risco e Liquidez, Estrutura e Cadastro) por setor e por UF, comparando a taxa de incidência do segmento contra a média das suas carteiras. Mostrado apenas para segmentos com pelo menos 3 cedentes e desvio relevante (≥15 p.p.)."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+      <div class="subhdr">Insights estratégicos por segmento <span class="info" data-tip="Cruza cada indicador-chave dos dossiês (Restrições, Score, Central SCR, Risco e Liquidez, Estrutura e Cadastro) por setor e por UF, comparando a taxa de incidência do segmento contra a média das suas carteiras. Mostrado apenas para segmentos com pelo menos 3 cedentes e desvio relevante (≥15 p.p.)."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
       <div class="grid g2" style="align-items:start;margin-bottom:16px">
         <div>
           <h4 style="margin-bottom:6px">Sinais de risco concentrado</h4>
@@ -916,6 +1169,8 @@ details.exp summary:hover{color:#fff}
         <div class="preset" id="pl-cus" onclick="selPlan('cus')"><h4>Personalizado</h4><div class="mini">Monte o pacote: escolha as fontes e cada grupo de indicadores NÚCLEA individualmente, com o custo calculado em tempo real.</div><div class="plancost" id="cust-cost-preview">a partir de R$ 1,70</div></div>
       </div>
 
+      <div id="plan-detalhe" style="max-width:1240px;margin-bottom:16px"></div>
+
       <div id="custom-panel" style="display:none;max-width:1240px;margin-bottom:16px">
         <div class="grid g2">
           <div class="card">
@@ -984,8 +1239,156 @@ details.exp summary:hover{color:#fff}
       </div>
     </div>
 
+    <!-- ================= TELA 7 : MONITORAMENTO ================= -->
+    <div id="monitoramento" style="display:none">
+      <div class="crumb" style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+        <span>Operação &nbsp;›&nbsp; <b>Monitoramento</b></span>
+        <button class="btnpri" id="mon-novo-btn" style="margin:0" onclick="monNovo()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Novo monitoramento</button>
+      </div>
+      <h1>Monitoramento</h1>
+
+      <!-- LISTA -->
+      <div id="mon-list-view">
+        <div class="subhdr" style="margin-top:18px">Monitoramentos de FIDCs<span class="info" data-tip="Cada monitoramento acompanha um grupo de FIDCs sob gestão, com reconsulta recorrente dos indicadores. Clique para ver a visão consolidada e a lista de fundos monitorados."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+        <div class="mini" style="margin-top:-6px">Acompanhamento recorrente de grupos de FIDCs do portfólio</div>
+        <div class="cartgrid" id="mon-grid"></div>
+      </div>
+
+      <!-- DETALHE -->
+      <div id="mon-detail-view" style="display:none">
+        <div class="clbanner">
+          <span>Monitoramento: <b id="mon-det-nome"></b></span>
+          <span class="audcat audcat-dossie" id="mon-det-rec"></span>
+          <span class="clpen" title="Editar monitoramento" onclick="monEditar()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+          <span class="golink" onclick="monVoltar()" style="margin-left:auto"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> ver todos os monitoramentos</span>
+        </div>
+        <div class="sub" id="monf-sub" style="margin-top:14px">Carregando…</div>
+
+        <div class="subhdr">Pulso dos FIDCs monitorados</div>
+        <div class="grid g4" id="monf-kpis" style="margin-bottom:16px"></div>
+
+        <div class="subhdr">Leitura estratégica <span class="info" data-tip="Sinais gerados pela IA cruzando os indicadores dos FIDCs monitorados (PL, inadimplência, subordinação, rentabilidade, concentração)."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+        <div class="grid g2" style="align-items:start;margin-bottom:16px">
+          <div><h4 style="margin-bottom:6px">Sinais de risco por FIDC</h4><div class="card"><ul class="motlist" id="monf-insights-risco"></ul></div></div>
+          <div><h4 style="margin-bottom:6px">Oportunidades no grupo</h4><div class="card"><ul class="motlist" id="monf-insights-oport"></ul></div></div>
+        </div>
+
+        <div class="grid g2" style="align-items:start">
+          <div>
+            <div class="subhdr">Radar de atenção <span class="info" data-tip="FIDCs monitorados que exigem ação: subordinação no piso/abaixo do mínimo, inadimplência alta, concentração elevada."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+            <div class="card"><ul class="motlist" id="monf-radar"></ul></div>
+          </div>
+          <div>
+            <div class="subhdr">Ranking por exposição</div>
+            <div class="card"><div id="monf-ranking"></div></div>
+          </div>
+        </div>
+
+        <div class="subhdr" style="margin-top:20px">Composição do grupo <span class="info" data-tip="Como o grupo monitorado se distribui entre os FIDCs, por tipo de operação e por situação de risco."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+        <div class="grid g3" style="margin-bottom:16px">
+          <div class="card"><h4>Por FIDC</h4><div class="src">% do PL do grupo</div><div id="monf-porfidc"></div></div>
+          <div class="card"><h4>Por tipo de operação</h4><div class="src">% do PL por classe</div><div id="monf-classe"></div></div>
+          <div class="card"><h4>Por situação de risco</h4><div class="src">nº de FIDCs por status</div><div id="monf-status"></div></div>
+        </div>
+
+        <div class="subhdr" style="margin-top:20px">Indicadores de risco por FIDC</div>
+        <div class="grid g3" style="margin-bottom:16px">
+          <div class="card"><h4>Inadimplência</h4><div class="src">% da carteira vencida +90d</div><div id="monf-inad"></div></div>
+          <div class="card"><h4>Subordinação vs. mínimo</h4><div class="src">razão atual e piso do regulamento</div><div id="monf-subord"></div></div>
+          <div class="card"><h4>Rentabilidade</h4><div class="src">% do CDI à cota sênior</div><div id="monf-rent"></div></div>
+        </div>
+
+        <div class="grid g2" style="align-items:start">
+          <div>
+            <div class="subhdr">Tendência do PL do grupo</div>
+            <div class="card" id="monf-tend"></div>
+          </div>
+          <div>
+            <div class="subhdr">Enquadramento e alertas regulatórios</div>
+            <div class="card"><div id="monf-enq"></div></div>
+          </div>
+        </div>
+
+        <div class="grid g2" style="align-items:start;margin-top:20px">
+          <div>
+            <div class="subhdr">Consumo e custo de dados (consolidado)</div>
+            <div class="card" id="monf-custo"></div>
+          </div>
+          <div>
+            <div class="subhdr">Comitê — decisões recentes</div>
+            <div class="card" id="monf-comite"></div>
+          </div>
+        </div>
+
+        <div class="subhdr" style="margin-top:24px">FIDCs monitorados</div>
+        <div id="mon-analitico"></div>
+      </div>
+    </div>
+
+    <!-- Modal: Novo / Editar monitoramento -->
+    <div class="modalbg" id="modalmon" onclick="if(event.target===this)fecharModal('modalmon')">
+      <div class="modal" style="max-width:520px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><h3 id="mon-modal-title" style="font-size:18px;font-weight:500">Novo monitoramento</h3><span onclick="fecharModal('modalmon')" style="cursor:pointer;color:var(--mut)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></div>
+        <div class="mfield"><label>Nome do monitoramento</label><input id="mon-nome" placeholder="ex.: FIDCs em atenção — semanal"></div>
+        <div class="mfield"><label>FIDCs a monitorar</label><div id="mon-cart-list" style="display:flex;flex-direction:column;gap:8px;max-height:210px;overflow-y:auto;border:1px solid var(--line);border-radius:8px;padding:10px 12px"></div></div>
+        <div class="mfield"><label>Recorrência da reconsulta</label><select id="mon-recorr"></select></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:6px">
+          <button class="btn histdel" id="mon-modal-del" style="display:none" onclick="monExcluir()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Excluir</button>
+          <div style="display:flex;gap:10px;margin-left:auto">
+            <button class="btn" style="padding:10px 18px" onclick="fecharModal('modalmon')">Cancelar</button>
+            <button class="btnpri" style="margin:0" onclick="monSalvar()">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TELA 6 : AUDITORIA ================= -->
+    <div id="auditoria" style="display:none">
+      <div class="crumb">Gestão &nbsp;›&nbsp; <b>Auditoria</b></div>
+      <h1>Auditoria</h1>
+      <div class="card" style="margin-top:12px">
+        <div class="hhead">
+          <div>
+            <div class="subhdr" style="margin:0">Trilha de auditoria<span class="info" data-tip="Registro imutável de acessos e ações no sistema, por usuário, com data e hora. Cada evento traz categoria, alvo/objeto, origem (IP) e resultado."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+            <div class="mini" style="margin-top:2px">Logs do sistema — acessos e ações registrados por usuário</div>
+          </div>
+          <button class="btn" style="padding:10px 20px" onclick="audExportar()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exportar CSV</button>
+        </div>
+        <div class="audtoolbar" style="margin-top:16px">
+          <div class="field"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><div class="fw"><label>Buscar (ação, usuário, alvo, IP)</label><input id="aud-busca" oninput="audSetBusca(this.value)" placeholder="ex.: dossiê, política, Duo Frio, login..."></div></div>
+          <div class="audsel"><label>Categoria</label><select id="aud-filt-cat" onchange="audSetCat(this.value)"></select></div>
+          <div class="audsel"><label>Usuário</label><select id="aud-filt-user" onchange="audSetUser(this.value)"></select></div>
+        </div>
+        <div class="htblwrap" style="margin-top:10px">
+          <table class="htbl" style="min-width:940px">
+            <thead>
+              <tr>
+                <th onclick="audSort('ts')">Data e hora <span class="hcaret">▾</span></th>
+                <th onclick="audSort('usuario')">Usuário <span class="hcaret">▾</span></th>
+                <th onclick="audSort('categoria')">Categoria <span class="hcaret">▾</span></th>
+                <th onclick="audSort('acao')">Ação <span class="hcaret">▾</span></th>
+                <th>Detalhe</th>
+                <th onclick="audSort('ip')">Origem (IP) <span class="hcaret">▾</span></th>
+              </tr>
+            </thead>
+            <tbody id="aud-tbody"></tbody>
+          </table>
+        </div>
+        <div class="histpag" style="margin-top:16px">
+          <div class="histpag-l">
+            <span class="mini" id="aud-range"></span>
+            <select id="aud-perpage" onchange="audPerPage(this.value)"><option value="15">15</option><option value="30">30</option><option value="60">60</option></select>
+            <span class="mini">linhas por página</span>
+          </div>
+          <div class="histpag-r" id="aud-pages"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- ================= TELA 5 : CARTEIRAS e CLIENTES ================= -->
     <div id="carteiras" style="display:none">
+      <!-- ===== visão do ANALISTA (cedentes/carteiras) ===== -->
+      <div id="cart-analista-view">
       <div class="crumb" style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
         <span>Visão executiva &nbsp;›&nbsp; <b>Carteiras e Clientes</b></span>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -995,8 +1398,10 @@ details.exp summary:hover{color:#fff}
       </div>
       <h1>Carteiras e Clientes</h1>
 
-      <div class="subhdr" style="margin-top:18px">Minhas carteiras<span class="info" data-tip="Grupos de CNPJs. Clique numa carteira para ver seus clientes e os números consolidados. Use “Nova” para criar uma carteira."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
-      <div class="mini" style="margin-top:-6px">Clique para mostrar os clientes da carteira</div>
+      <div class="subhdr" style="margin-top:18px">
+        <span style="display:flex;align-items:center;gap:4px">Minhas carteiras<span class="info" data-tip="Grupos de CNPJs (cedentes) do FIDC. Clique numa carteira para ver seus clientes e os números consolidados."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></span>
+      </div>
+      <div class="mini" style="margin-top:-6px">Clique numa carteira para ver os clientes e os números consolidados</div>
       <div class="cartgrid" id="cart-grid"></div>
 
       <div id="cart-detalhe" style="display:none">
@@ -1052,6 +1457,36 @@ details.exp summary:hover{color:#fff}
           <div class="histpag-r" id="cl-pages"></div>
         </div>
       </div>
+      </div><!-- /cart-analista-view -->
+
+      <!-- ===== visão do GESTOR / Asset Manager (FIDCs clientes) ===== -->
+      <div id="cart-gestor-view" style="display:none">
+        <div class="crumb"><span>Visão executiva &nbsp;›&nbsp; <b>Clientes (FIDCs)</b></span></div>
+
+        <!-- LISTA -->
+        <div id="cfidc-list">
+          <h1>Clientes (FIDCs)</h1>
+          <div class="sub">Fundos de investimento em direitos creditórios que a asset administra. Cada FIDC é um cliente; seus cedentes são geridos pelos analistas.</div>
+          <div class="subhdr" style="margin-top:18px">FIDCs clientes <span class="info" data-tip="Relação dos FIDCs sob gestão com seus indicadores-chave. Clique em um fundo para abrir a ficha completa e ver suas carteiras de cedentes."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+          <div class="mini" style="margin-top:-6px">Clique em um FIDC para abrir a ficha e as carteiras de cedentes do fundo</div>
+          <div class="card" style="margin-top:14px"><div class="htblwrap"><table class="htbl" style="min-width:820px">
+            <thead><tr>
+              <th onclick="cfidcSort('nome')">FIDC <span class="hcaret">▾</span></th>
+              <th onclick="cfidcSort('classe')">Tipo <span class="hcaret">▾</span></th>
+              <th class="hcol-right" onclick="cfidcSort('pl')">PL <span class="hcaret">▾</span></th>
+              <th class="hcol-right" onclick="cfidcSort('exp')">Direitos creditórios <span class="hcaret">▾</span></th>
+              <th class="hcol-right" onclick="cfidcSort('inad')">Inadimpl. <span class="hcaret">▾</span></th>
+              <th class="hcol-right" onclick="cfidcSort('subord')">Subord. <span class="hcaret">▾</span></th>
+              <th onclick="cfidcSort('status')">Situação <span class="hcaret">▾</span></th>
+              <th></th>
+            </tr></thead>
+            <tbody id="cfidc-tbody"></tbody>
+          </table></div></div>
+        </div>
+
+        <!-- DETALHE / FICHA -->
+        <div id="cfidc-detail" style="display:none"></div>
+      </div>
     </div>
 
     <!-- ================= TELA 4 : HISTÓRICO ================= -->
@@ -1081,6 +1516,7 @@ details.exp summary:hover{color:#fff}
                 <th onclick="histSort('cnpj')">CNPJ <span class="hcaret">▾</span></th>
                 <th onclick="histSort('criador')">Criado por <span class="hcaret">▾</span></th>
                 <th onclick="histSort('data')">Data <span class="hcaret">▾</span></th>
+                <th onclick="histSort('status')">Status <span class="hcaret">▾</span></th>
                 <th class="hcol-right" onclick="histSort('exposicao')">Exposição <span class="hcaret">▾</span></th>
                 <th></th>
               </tr>
@@ -1104,6 +1540,19 @@ details.exp summary:hover{color:#fff}
           <div class="histpag-r" id="hist-pages"></div>
         </div>
       </div>
+    </div>
+
+    <!-- ================= TELA : APROVAÇÕES (dupla aprovação) ================= -->
+    <div id="aprovacoes" style="display:none">
+      <div class="crumb">Visão executiva &nbsp;›&nbsp; <b>Comitê</b></div>
+      <div id="aprov-lista">
+        <h1>Comitê de crédito</h1>
+        <div class="sub" id="aprov-sub">Créditos aprovados pelos FIDCs, aguardando decisão em última instância do comitê da asset.</div>
+        <div id="aprov-banner-perfil"></div>
+        <div class="subhdr">Pendentes de aprovação <span class="info" data-tip="Créditos aprovados pelo analista de crédito de cada FIDC que aguardam a decisão final do comitê da asset (Asset Manager). Reprovações do analista são finais e não aparecem aqui."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+        <div id="aprov-cards"></div>
+      </div>
+      <div id="aprov-review" style="display:none"></div>
     </div>
 
     <!-- ================= TELA 2 : DOSSIÊ ================= -->
@@ -1203,7 +1652,7 @@ details.exp summary:hover{color:#fff}
 
       <!-- BUREAUS -->
       <section data-req="serasa" id="sec-bureaus">
-        <div class="stitle">Bureaus e Restrições <small>SERASA · consulta 02/07/2026 · confirmação CCF: Dados cadastrais</small></div>
+        <div class="stitle">Restrições <small>SERASA · consulta 02/07/2026 · confirmação CCF: Dados cadastrais</small></div>
         <div class="card" style="margin-bottom:16px">
           <h4>Anotações negativas<span class="info" data-tip="Registros de inadimplência e restrições públicas do CNPJ: pendências financeiras, protestos, ações judiciais, cheques sem fundo e falências. Origem: SERASA (Relatório Intermediário TOP Score PJ), com CCF confirmado nos dados cadastrais."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></h4><div class="src">Relatório Intermediário TOP Score PJ · recência e papel do devedor já detalhados por linha</div>
           <div class="krow" style="justify-content:flex-start"><span class="k">Pendências financeiras (PEFIN)</span><span class="v" style="text-align:left">0</span><span class="badge b-grn">SEM OCORRÊNCIAS</span></div>
@@ -1823,14 +2272,18 @@ details.exp summary:hover{color:#fff}
       </div>
     </div>
 
-    <label class="flabel">Observações</label>
-    <textarea class="ftxt" id="f-obs" placeholder="Observações do analista sobre a operação…"></textarea>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin:14px 0 5px;gap:12px;flex-wrap:wrap">
+      <label class="flabel" style="margin:0">Justificativa do parecer (obrigatória)</label>
+      <button type="button" class="suggbtn" onclick="sugerirJustificativa()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M12 19v2M5 12H3M21 12h-2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4"/><circle cx="12" cy="12" r="3.5"/></svg> Sugerir com IA</button>
+    </div>
+    <textarea class="ftxt" id="f-just" style="min-height:118px" placeholder="Justifique a decisão — obrigatória tanto para aprovação quanto para reprovação. Use “Sugerir com IA” para gerar um rascunho a partir do parecer preliminar e edite livremente."></textarea>
+    <div class="mini" style="margin-top:6px">A justificativa acompanha o dossiê e, no caso de aprovação, é enviada ao Asset Manager para a decisão em última instância.</div>
 
     <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px">
       <button class="backbtn" onclick="fecharRegParecer()">Cancelar</button>
       <button class="btnpri" style="margin-left:0" onclick="salvarParecer()">Salvar parecer</button>
     </div>
-    <div class="note">O parecer é registrado com trilha de auditoria (usuário, data/hora, versão da política e hash do dossiê) e passa a constar no topo do dossiê e no histórico da operação.</div>
+    <div class="note">O parecer é registrado com trilha de auditoria (usuário, data/hora, versão da política e hash do dossiê), passa a constar no topo do dossiê e no histórico, e — quando aprovado — abre uma solicitação de aprovação para o Asset Manager.</div>
   </div>
 </div>
 
@@ -1942,6 +2395,7 @@ details.exp summary:hover{color:#fff}
 </div>
 
 <button class="backfab" id="backfab" onclick="navVoltar()" title="Voltar ao ponto da leitura"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg> Voltar à leitura</button>
+</div><!-- /#app -->
 <script>
 const PF = {
   jcm: {nome:'J.C.M. — Diretor-presidente (22%)', score:'788', pd:'1,9%', faixa:'<span class="badge b-grn">RISCO BAIXO</span>',
@@ -1979,10 +2433,10 @@ function relRows(){
   const confRowIdx = R.length;
   a('Análise de risco','Confiança do dossiê','Alta · 100%','','IA'); // Detalhe preenchido abaixo, após contar todos os indicadores
   KEYIND.filter(k=>k.on).forEach(k=>a('Indicadores chave',k.nome,k.hit?(k.sev==='bloq'?'ALERTA':'ATENÇÃO'):'LIVRE',k.det,k.fonte));
-  a('Bureaus','PEFIN','0','sem ocorrências','SERASA'); a('Bureaus','REFIN','1 · R$ 35.020,00','11/2025 · devedor principal','SERASA');
-  a('Bureaus','Protestos','2 · R$ 12.300,00','última 03/2025','SERASA'); a('Bureaus','Ações judiciais','3 · R$ 890.500,00','cíveis · sem execução fiscal','SERASA');
-  a('Bureaus','CCF','0','convergente com os dados cadastrais','SERASA'); a('Bureaus','Falência/RJ','Nada consta','','SERASA');
-  a('Bureaus','Total restritivos','R$ 47.320,00','≈0,01% do faturamento','SERASA');
+  a('Restrições','PEFIN','0','sem ocorrências','SERASA'); a('Restrições','REFIN','1 · R$ 35.020,00','11/2025 · devedor principal','SERASA');
+  a('Restrições','Protestos','2 · R$ 12.300,00','última 03/2025','SERASA'); a('Restrições','Ações judiciais','3 · R$ 890.500,00','cíveis · sem execução fiscal','SERASA');
+  a('Restrições','CCF','0','convergente com os dados cadastrais','SERASA'); a('Restrições','Falência/RJ','Nada consta','','SERASA');
+  a('Restrições','Total restritivos','R$ 47.320,00','≈0,01% do faturamento','SERASA');
   a('Scores','Score Positivo','712/1000','PD 6m 3,2% · modelo H4PJ','SERASA');
   a('Scores','Score Materialidade 90d','802/1000','R0 · RB2 · R10','NÚCLEA');
   a('Scores','Score Materialidade (30 dias)','815/1000','próximos 30 dias, só boletos · produto distinto da Evolução 90d','NÚCLEA');
@@ -2046,9 +2500,9 @@ function relRows(){
   a('Estrutura','Funcionários / filiais / veículos','512 / 8 / 46','coerente com porte','Dados cadastrais');
   a('Estrutura','CNAEs secundários','4669-9/99 · 4661-3/00 · 5250-8/05','','Dados cadastrais');
   a('Estrutura','Filiais — lista','Matriz POA + 7 filiais','Caxias do Sul, Florianópolis, Joinville, Curitiba, Londrina, São Paulo (2)','Dados cadastrais');
-  a('Bureaus','Protestos — recência','1ª 08/2023 · última 03/2025','devedor principal · sujeito a validação first/lastOcurrence','SERASA');
-  a('Bureaus','Ações judiciais — papel','devedor principal (réu)','','SERASA');
-  a('Bureaus','Status cadastral (registration)','ATIVO','','SERASA');
+  a('Restrições','Protestos — recência','1ª 08/2023 · última 03/2025','devedor principal · sujeito a validação first/lastOcurrence','SERASA');
+  a('Restrições','Ações judiciais — papel','devedor principal (réu)','','SERASA');
+  a('Restrições','Status cadastral (registration)','ATIVO','','SERASA');
   a('QSA','DF Participações Ltda','68%','sócia PJ controladora · sem anotações','Dados cadastrais × SERASA');
   a('QSA','J.C.M.','22%','diretor-presidente · sem anotações','Dados cadastrais × SERASA');
   a('QSA','P.A.R.','10%','1 protesto PF','Dados cadastrais × SERASA');
@@ -2090,24 +2544,39 @@ function gerarRel(){
 }
 /* ---- registrar parecer do analista ---- */
 let DEC = null;
+let JUST_AI_FILLED = false;
 function abrirRegParecer(){ document.getElementById('regmodal').style.display = 'flex'; }
 function fecharRegParecer(){ document.getElementById('regmodal').style.display = 'none'; }
+function aiSugestaoJustificativa(dec){
+  if(dec==='rep') return 'Reprovação recomendada. Ainda que a Duo Frio apresente 30 anos de atividade e situação cadastral ativa, o score mestre de 71/100 combinado à concentração de sacados e à pendência em atenção na Central SCR compromete o limite pleiteado de R$ 5.000.000,00 nesta janela, sem garantias adicionais que mitiguem o risco.';
+  if(dec==='res') return 'Aprovação com ressalvas recomendada. A Duo Frio tem 30 anos de atividade, situação cadastral ativa e faturamento compatível (o limite equivale a 13,1% do faturamento mensal estimado). O score mestre de 71/100 (risco moderado) reflete concentração de sacados e um indicador em atenção na Central SCR, sem alertas bloqueantes. Condiciono a aprovação à trava de concentração máxima de 20% por sacado, verificação de lastro em amostra de duplicatas e reavaliação em caso de novo restritivo.';
+  return 'Aprovação recomendada. A Duo Frio apresenta 30 anos de atividade, situação cadastral ativa, ausência de restritivos relevantes e faturamento compatível com o limite de R$ 5.000.000,00 (13,1% do faturamento mensal estimado). O score mestre de 71/100 e o comportamento adimplente na Central SCR sustentam a operação dentro da política de risco vigente.';
+}
+function sugerirJustificativa(){
+  const d = DEC || 'res';
+  const t = document.getElementById('f-just');
+  t.value = aiSugestaoJustificativa(d);
+  JUST_AI_FILLED = true;
+}
 function selDec(d){
   DEC = d;
   ['apr','res','rep'].forEach(x=>document.getElementById('d-'+x).classList.toggle('sel', x===d));
   document.getElementById('f-aprovacao').style.display = (d==='rep') ? 'none' : 'block';
   document.getElementById('f-cond').style.display = (d==='res') ? 'block' : 'none';
+  const t = document.getElementById('f-just');
+  if(t && (!t.value.trim() || JUST_AI_FILLED)){ t.value = aiSugestaoJustificativa(d); JUST_AI_FILLED = true; }
 }
 function salvarParecer(){
   if(!DEC){ alert('Selecione a decisão (aprovar, aprovar com ressalvas ou reprovar).'); return; }
   if(DEC==='res' && !document.getElementById('f-condtxt').value.trim()){ alert('Condicionantes são obrigatórias para aprovação com ressalvas.'); return; }
+  const just = document.getElementById('f-just').value.trim();
+  if(!just){ alert('A justificativa é obrigatória para registrar o parecer — tanto para aprovar quanto para reprovar.'); document.getElementById('f-just').focus(); return; }
   const agora = new Date();
   const dt = agora.toLocaleDateString('pt-BR') + ' às ' + agora.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
   const dias = parseInt(document.getElementById('f-validade').value);
   const venc = new Date(agora.getTime() + dias*86400000).toLocaleDateString('pt-BR');
   const limite = document.getElementById('f-limite').value;
   const cond = document.getElementById('f-condtxt').value.trim();
-  const obs = document.getElementById('f-obs').value.trim();
   const CFG = {
     apr: {cls:'pr-apr', badge:'<span class="badge b-grn">APROVADO</span>', t:'Operação aprovada'},
     res: {cls:'pr-res', badge:'<span class="badge b-amb">APROVADO COM RESSALVAS</span>', t:'Operação aprovada com ressalvas'},
@@ -2118,22 +2587,37 @@ function salvarParecer(){
     det += `<b>Limite aprovado:</b> ${limite} · <b>Validade:</b> ${dias} dias (até ${venc})`;
     if(DEC==='res' && cond) det += `<br><b>Condicionantes:</b> ${cond}`;
   }
-  if(obs) det += `${det?'<br>':''}<b>Observações:</b> ${obs}`;
+  det += `${det?'<br>':''}<b>Justificativa:</b> ${just}`;
+  const dManager = DEC==='rep'
+    ? '<div class="prdet" style="margin-top:8px;color:var(--red)"><b>Encaminhamento:</b> reprovação registrada em 1ª instância (FIDC) — decisão final, não segue para o Asset Manager.</div>'
+    : '<div class="prdet" style="margin-top:8px;color:var(--amb)"><b>Encaminhamento:</b> solicitação aberta para o Asset Manager (Waldick Soriano) aprovar em última instância.</div>';
   document.getElementById('parecer-reg').innerHTML = `
     <div class="parecerreg ${CFG.cls}">
       <div>
         <h5>${CFG.badge} &nbsp;Parecer do analista — ${CFG.t}</h5>
-        <div class="prdet">${det || '<i>Sem detalhes adicionais.</i>'}</div>
+        <div class="prdet">${det}</div>
+        ${dManager}
       </div>
       <div class="prmeta" style="text-align:right">
-        <b style="color:#fff">Analista de Crédito</b><br>${dt}<br>
+        <b style="color:#fff">Marina Costa · Analista de crédito</b><br>${dt}<br>
         <span class="mini">registro auditável · id op-2026-0702-0147</span>
       </div>
     </div>`;
   fecharRegParecer();
   const btn = document.querySelector('.stitle .btnpri');
   if(btn){ btn.textContent = 'Editar parecer registrado'; }
+  // ---- fluxo de dupla aprovação: atualiza a solicitação e notifica o gestor ----
+  const duo = HISTORICO.find(h=>h.id==='duofrio');
+  if(duo){
+    duo.decisaoAnalista = DEC==='apr'?'Aprovar':(DEC==='res'?'Aprovar com ressalvas':'Reprovar');
+    duo.justificativa = just;
+    duo.analistaTs = Date.now();
+    duo.statusAprov = DEC==='rep' ? 'repr_analista' : 'analista';
+    audLog('dossie','Registrou parecer', `Refrigeração Duo Frio · ${duo.decisaoAnalista} · limite ${limite}`, DEC==='rep'?'neg':'ok');
+    renderNotif();
+  }
   window.scrollTo({top:0, behavior:'smooth'});
+  if(duo && DEC!=='rep') setTimeout(()=>alert('Parecer registrado. O Asset Manager (Waldick Soriano) foi notificado para aprovar o crédito em última instância — veja o sino de notificações ao alternar para o perfil do gestor.'), 60);
 }
 const POLRULES=[
 {sec:'Bureau e restrições',nome:'Score Positivo PJ',tipoItem:'Regra direta',tipo:'Score',op:'<, <=, entre, >=, >',faixa:'0 a 1000',ex:'Score Serasa < 400 = Atenção/Alerta',sev:'Atenção/Alerta',guard:'Escala 0–1000 não pode ser alterada.',def_:'Score cadastral/bureau 0–1000 da Serasa.'},
@@ -2493,7 +2977,7 @@ function renderPolicy(){
 }
 /* ---- painel de políticas ---- */
 function goPolicy(){
-  ['home','dossier','cockpit','cockpitan','historico','carteiras'].forEach(id=>document.getElementById(id).style.display='none');
+  ['home','dossier','cockpit','cockpitan','historico','carteiras','auditoria','monitoramento','aprovacoes'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('policy').style.display='block';
   document.getElementById('subnav').style.display='none';
   document.getElementById('nav-novo').classList.remove('on');
@@ -2501,6 +2985,9 @@ function goPolicy(){
   document.getElementById('nav-cockpit-an').classList.remove('on');
   document.getElementById('nav-hist').classList.remove('on');
   document.getElementById('nav-cart').classList.remove('on');
+  document.getElementById('nav-aud').classList.remove('on');
+  document.getElementById('nav-mon').classList.remove('on');
+  document.getElementById('nav-aprov').classList.remove('on');
   document.getElementById('nav-pol').classList.add('on');
   polInitFiltros();
   renderPolicy();
@@ -2570,12 +3057,41 @@ function vhtRender(per){
 
 /* Preços reais por contrato: SERASA R$23,24/relatório · Dados cadastrais R$0,11/consulta · SCR R$0,12/data-base · NÚCLEA R$1,70 por chamada (grupo = nº de chamadas × 1,70) */
 const CUSTOS = {serasa:23.24, databusca:0.11, scr:0.12, 'nu-score':5.10, 'nu-liq':6.80, 'nu-auto':5.10, 'nu-tend':5.10, 'nu-conc':3.40, 'nu-vht':11.90, 'nu-pred':1.70, 'nu-auto2':3.40, 'nu-inad':10.20, 'nu-concrec':3.40, 'nu-comport':8.50};
-const LABELS = {serasa:'Bureaus e Restrições (SERASA)', databusca:'Estrutura e Cadastro (Dados cadastrais)', scr:'Endividamento no SFN (SCR — Banco Central)', 'nu-score':'Score transacional NÚCLEA', 'nu-liq':'Liquidez de pagamento (NÚCLEA)', 'nu-auto':'Autoliquidação — antifraude (NÚCLEA)', 'nu-tend':'Tendências transacionais (NÚCLEA)', 'nu-conc':'Concentração de pagamentos (NÚCLEA)', 'nu-vht':'Valor histórico transacionado — CNPJ × cluster (NÚCLEA)', 'nu-pred':'Predição de recebimentos (NÚCLEA)', 'nu-auto2':'Autoliquidação — sócios e grupo econômico (NÚCLEA)', 'nu-inad':'Inadimplência de boletos (NÚCLEA)', 'nu-concrec':'Concentração de recebimento — sacados (NÚCLEA)', 'nu-comport':'Comportamento transacional e Canais (NÚCLEA)'};
+const LABELS = {serasa:'Restrições (SERASA)', databusca:'Estrutura e Cadastro (Dados cadastrais)', scr:'Endividamento no SFN (SCR — Banco Central)', 'nu-score':'Score transacional NÚCLEA', 'nu-liq':'Liquidez de pagamento (NÚCLEA)', 'nu-auto':'Autoliquidação — antifraude (NÚCLEA)', 'nu-tend':'Tendências transacionais (NÚCLEA)', 'nu-conc':'Concentração de pagamentos (NÚCLEA)', 'nu-vht':'Valor histórico transacionado — CNPJ × cluster (NÚCLEA)', 'nu-pred':'Predição de recebimentos (NÚCLEA)', 'nu-auto2':'Autoliquidação — sócios e grupo econômico (NÚCLEA)', 'nu-inad':'Inadimplência de boletos (NÚCLEA)', 'nu-concrec':'Concentração de recebimento — sacados (NÚCLEA)', 'nu-comport':'Comportamento transacional e Canais (NÚCLEA)'};
 const PLANDEF = {
   bas: {nome:'Básico', tags:['serasa','databusca','nu-score','nu-liq']},
   int: {nome:'Intermediário', tags:['serasa','databusca','scr','nu-score','nu-liq','nu-auto','nu-tend','nu-inad']},
   com: {nome:'Completo', tags:['serasa','databusca','scr','nu-score','nu-liq','nu-auto','nu-tend','nu-conc','nu-vht','nu-pred','nu-auto2','nu-inad','nu-concrec','nu-comport']}
 };
+/* detalhamento de indicadores por grupo, agrupado por fonte */
+const GRUPO_DET = {
+  serasa:{fonte:'SERASA', itens:['Restritivos: PEFIN, REFIN, protestos, ações judiciais, falência/RJ, CCF','Score Positivo PJ (H4PJ) com PD 6 meses','Quadro societário com flags de anotações','Faturamento estimado','Score de fraude documental']},
+  databusca:{fonte:'Dados cadastrais', itens:['Identificação: razão social, CNAE, natureza jurídica','Situação cadastral na Receita','Porte, capital social e dimensão','Quadro societário e contatos','Faturamento presumido']},
+  scr:{fonte:'SCR — Banco Central', itens:['Endividamento: carteira, responsabilidade e risco total','Perfil de vencimentos e modalidades','Garantias, limites e moeda estrangeira','Inadimplência e dias de atraso no SFN']},
+  'nu-score':{fonte:'NÚCLEA', itens:['Score Materialidade Evolução 90d + reason codes','Score Materialidade 30d','Score Quantidade 30d']},
+  'nu-liq':{fonte:'NÚCLEA', itens:['Índice de liquidez de pagamento','Por valor na baixa, valor nominal e por quantidade']},
+  'nu-auto':{fonte:'NÚCLEA', itens:['Autoliquidação cedente = portador','Autoliquidação cedente = sacado','Autoliquidação sacado ≠ portador']},
+  'nu-tend':{fonte:'NÚCLEA', itens:['Tendências de boletos, cartões e TED (par 3M/12M)']},
+  'nu-conc':{fonte:'NÚCLEA', itens:['Concentração de pagamentos — maior beneficiário','Índice ponderado (Herfindahl)']},
+  'nu-vht':{fonte:'NÚCLEA', itens:['Valor histórico transacionado — CNPJ × cluster (7 recortes)']},
+  'nu-pred':{fonte:'NÚCLEA', itens:['Predição de recebimentos para 12 meses']},
+  'nu-auto2':{fonte:'NÚCLEA', itens:['Autoliquidação — portador é sócio','Autoliquidação — sacado é sócio']},
+  'nu-inad':{fonte:'NÚCLEA', itens:['Taxa de inadimplência acima de 30 dias','Baixas por protesto/decurso','Share de dias de inadimplência','Média de dias de atraso (simples e ponderada)']},
+  'nu-concrec':{fonte:'NÚCLEA', itens:['Concentração de recebimento — sacados','Índice ponderado']},
+  'nu-comport':{fonte:'NÚCLEA', itens:['Frequência de movimentação','Canais de recebimento e pagamento de boletos','Recebimento de cartão em bancos digitais']}
+};
+const DET_FONTE_ORDEM=['SERASA','Dados cadastrais','SCR — Banco Central','NÚCLEA'];
+function renderPlanoDetalhe(tags, nomePlano){
+  const box=document.getElementById('plan-detalhe'); if(!box) return;
+  const porFonte={};
+  tags.forEach(t=>{ const g=GRUPO_DET[t]; if(!g) return; (porFonte[g.fonte]=porFonte[g.fonte]||[]).push(...g.itens); });
+  const nFontes = Object.keys(porFonte).length;
+  const cards = DET_FONTE_ORDEM.filter(f=>porFonte[f]).map(f=>
+    `<div class="card"><h4>${f}</h4><ul class="plandet">${porFonte[f].map(i=>`<li>${i}</li>`).join('')}</ul></div>`
+  ).join('');
+  const total = tags.reduce((a,t)=>a+((GRUPO_DET[t]&&GRUPO_DET[t].itens.length)||0),0);
+  box.innerHTML = `<div class="subhdr" style="margin-top:4px">Indicadores incluídos <span class="mini" style="font-weight:400">· plano ${nomePlano} · ${total} indicadores em ${nFontes} fonte(s)</span></div><div class="grid g4">${cards}</div>`;
+}
 /* Janelas selecionáveis por grupo NÚCLEA (cada janela de cada indicador é uma chamada de R$ 1,70)
    e data-bases selecionáveis no SCR (cada data-base é uma chamada de R$ 0,12). */
 const JANELAS_NU = {
@@ -2621,9 +3137,11 @@ function jPrecosAtualiza(){
 let PLANO = {nome:'Completo', tags:[...PLANDEF.com.tags], custo:custoDe(PLANDEF.com.tags)};
 function selPlan(p){
   ['bas','int','com','cus'].forEach(x=>document.getElementById('pl-'+x).classList.toggle('sel', x===p));
-  document.getElementById('custom-panel').style.display = (p==='cus') ? 'block' : 'none';
-  if(p==='cus'){ custUpd(); }
-  else { janelasReset(); PLANO = {nome:PLANDEF[p].nome, tags:[...PLANDEF[p].tags], custo:custoDe(PLANDEF[p].tags)}; }
+  const cus = (p==='cus');
+  document.getElementById('custom-panel').style.display = cus ? 'block' : 'none';
+  document.getElementById('plan-detalhe').style.display = cus ? 'none' : 'block';
+  if(cus){ custUpd(); }
+  else { janelasReset(); PLANO = {nome:PLANDEF[p].nome, tags:[...PLANDEF[p].tags], custo:custoDe(PLANDEF[p].tags)}; renderPlanoDetalhe(PLANDEF[p].tags, PLANDEF[p].nome); }
   document.getElementById('btn-cost').textContent = '(' + fmtBRL(PLANO.custo) + ')';
 }
 function custUpd(){
@@ -2834,11 +3352,17 @@ function goHome(){
   document.getElementById('cockpitan').style.display='none';
   document.getElementById('historico').style.display='none';
   document.getElementById('carteiras').style.display='none';
+  document.getElementById('auditoria').style.display='none';
+  document.getElementById('monitoramento').style.display='none';
+  document.getElementById('aprovacoes').style.display='none';
   document.getElementById('nav-pol').classList.remove('on');
   document.getElementById('nav-cockpit').classList.remove('on');
   document.getElementById('nav-cockpit-an').classList.remove('on');
   document.getElementById('nav-hist').classList.remove('on');
   document.getElementById('nav-cart').classList.remove('on');
+  document.getElementById('nav-aud').classList.remove('on');
+  document.getElementById('nav-mon').classList.remove('on');
+  document.getElementById('nav-aprov').classList.remove('on');
   document.getElementById('nav-novo').classList.add('on');
   document.getElementById('home').style.display='block';
   const l = document.getElementById('loading');
@@ -2853,7 +3377,7 @@ function ckGestorPopularSelect(){
   }
 }
 function goCockpit(){
-  ['home','policy','dossier','cockpitan','historico','carteiras'].forEach(id=>document.getElementById(id).style.display='none');
+  ['home','policy','dossier','cockpitan','historico','carteiras','auditoria','monitoramento','aprovacoes'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('subnav').style.display='none';
   document.getElementById('cockpit').style.display='block';
   document.getElementById('nav-novo').classList.remove('on');
@@ -2861,14 +3385,17 @@ function goCockpit(){
   document.getElementById('nav-cockpit-an').classList.remove('on');
   document.getElementById('nav-hist').classList.remove('on');
   document.getElementById('nav-cart').classList.remove('on');
+  document.getElementById('nav-aud').classList.remove('on');
+  document.getElementById('nav-mon').classList.remove('on');
+  document.getElementById('nav-aprov').classList.remove('on');
   document.getElementById('nav-cockpit').classList.add('on');
-  ckGestorPopularSelect();
-  document.getElementById('ck-filtro-carteira').value = 'all';
-  ckGestorFiltrar();
+  ckfPopular();
+  ckfFiltrar();
+  renderCkAprovGestor();
   window.scrollTo(0,0);
 }
 function goCockpitAnalista(){
-  ['home','policy','dossier','cockpit','historico','carteiras'].forEach(id=>document.getElementById(id).style.display='none');
+  ['home','policy','dossier','cockpit','historico','carteiras','auditoria','monitoramento','aprovacoes'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('subnav').style.display='none';
   document.getElementById('cockpitan').style.display='block';
   document.getElementById('nav-novo').classList.remove('on');
@@ -2876,6 +3403,9 @@ function goCockpitAnalista(){
   document.getElementById('nav-cockpit').classList.remove('on');
   document.getElementById('nav-hist').classList.remove('on');
   document.getElementById('nav-cart').classList.remove('on');
+  document.getElementById('nav-aud').classList.remove('on');
+  document.getElementById('nav-mon').classList.remove('on');
+  document.getElementById('nav-aprov').classList.remove('on');
   document.getElementById('nav-cockpit-an').classList.add('on');
   ckAnalistaPopularSelects();
   ckAnalistaPopularCarteiras();
@@ -2894,21 +3424,57 @@ function histRating(sc){ if(sc>=90)return'AAA'; if(sc>=80)return'AA'; if(sc>=70)
 function histCnpj(i){ const a=String((11+i*7)%90+10); const b=String((100+i*137)%900+100); const c=String((100+i*271)%900+100); const d=String((10+i*13)%89+10); return a+'.'+b+'.'+c+'/0001-'+d; }
 function histFmtDT(ts){ const d=new Date(ts); const p=n=>String(n).padStart(2,'0'); return `${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()} | ${p(d.getHours())}h${p(d.getMinutes())}`; }
 function histFmtBRL(v){ return 'R$ '+Number(v).toLocaleString('pt-BR'); }
+/* ---- máquina de estados da dupla aprovação ---- */
+const APR_LABEL={gerado:'Dossiê gerado',analista:'Aprovado pelo analista',gestor:'Aprovado pelo gestor',repr_analista:'Reprovado pelo analista',repr_gestor:'Reprovado pelo gestor',revisao:'Em revisão'};
+const APR_CLS={gerado:'st-ger',analista:'st-an',gestor:'st-ge',repr_analista:'st-rep',repr_gestor:'st-rep',revisao:'st-rev'};
+const APR_ORD=['gerado','revisao','repr_analista','repr_gestor','analista','gestor'];
+function aprPill(s){ return `<span class="stpill ${APR_CLS[s]||'st-ger'}">${APR_LABEL[s]||'—'}</span>`; }
+function aprRisco(sc){ return sc>=70?'baixo':sc>=48?'moderado':'alto'; }
+function jstAnalista(h){
+  const r=aprRisco(h.score);
+  if(h.decisaoAnalista==='Reprovar') return `Reprovação recomendada. O score mestre de ${h.score}/100 (risco ${r}) combina restritivos ativos e comprometimento de fluxo de caixa incompatíveis com o limite pleiteado de ${histFmtBRL(h.exposicao)}, sem mitigadores suficientes para prosseguir nesta janela.`;
+  const ress = h.decisaoAnalista==='Aprovar com ressalvas' ? ' Recomenda-se trava de concentração máxima por sacado e verificação de lastro em amostra de duplicatas.' : '';
+  return `Aprovação ${h.decisaoAnalista==='Aprovar com ressalvas'?'com ressalvas ':''}recomendada. Situação cadastral ativa e faturamento compatível com o limite de ${histFmtBRL(h.exposicao)}; score mestre ${h.score}/100 (risco ${r}), sem alertas bloqueantes na política vigente.${ress}`;
+}
+function jstGestor(s){
+  if(s==='gestor') return 'Aprovação ratificada em última instância. Parecer do analista consistente com a política de risco vigente e exposição dentro dos limites de alçada da mesa.';
+  if(s==='repr_gestor') return 'Reprovado em última instância. Apesar do parecer favorável do analista, a operação eleva a concentração da carteira acima do apetite de risco atual; reapresentar com garantia adicional ou limite menor.';
+  if(s==='revisao') return 'Solicito complementação antes de decidir: detalhar a concentração por sacado e anexar comprovação de lastro das duplicatas. Reavaliar após atualização do dossiê.';
+  return '';
+}
 let HISTORICO=[];
 (function(){
   const base=new Date(2026,5,21,15,27).getTime();
+  const stCycle=['gerado','analista','analista','gestor','gestor','repr_gestor','repr_analista','revisao'];
+  const CRIADOR_FIDC={'Marina Costa':'f1','João Pedro':'f2','Mauro Gomes':'f4','Bruno Alves':'f3','Camila Duarte':'f6','Waldick Soriano':'f1'};
   for(let i=0;i<50;i++){
     const sc=30+(i*17)%65;
     const ts=base - i*(86400000*1.3|0) - (i%5)*3600000 - (i%7)*600000;
-    HISTORICO.push({ id:'h'+i, razao:HN_A[i%HN_A.length]+' '+HN_B[(i*7)%HN_B.length]+' '+HN_C[i%HN_C.length], cnpj:histCnpj(i), criador:HIST_CRIADORES[i%HIST_CRIADORES.length], ts, data:histFmtDT(ts), score:sc, rating:histRating(sc), exposicao:HIST_EXP[i%HIST_EXP.length] });
+    const st=stCycle[i%stCycle.length];
+    const criador=HIST_CRIADORES[i%HIST_CRIADORES.length];
+    const h={ id:'h'+i, razao:HN_A[i%HN_A.length]+' '+HN_B[(i*7)%HN_B.length]+' '+HN_C[i%HN_C.length], cnpj:histCnpj(i), criador, fidcId:CRIADOR_FIDC[criador]||'f1', ts, data:histFmtDT(ts), score:sc, rating:histRating(sc), exposicao:HIST_EXP[i%HIST_EXP.length], statusAprov:st, decisaoAnalista:null, justificativa:'', gestorDecisao:null, gestorJustificativa:'', analistaTs:null, gestorTs:null };
+    if(st!=='gerado'){
+      h.decisaoAnalista = st==='repr_analista' ? 'Reprovar' : (sc>=70?'Aprovar':'Aprovar com ressalvas');
+      h.analistaTs = ts + 2*3600000 + (i%6)*900000;
+      h.justificativa = jstAnalista(h);
+      if(st==='gestor'||st==='repr_gestor'||st==='revisao'){
+        h.gestorDecisao = st==='gestor'?'Aprovar':(st==='repr_gestor'?'Reprovar':'Solicitar mais informações');
+        h.gestorTs = h.analistaTs + 5*3600000 + (i%5)*1800000;
+        h.gestorJustificativa = jstGestor(st);
+      }
+    }
+    h.resumo = `Score ${h.score}/100 · risco ${aprRisco(h.score)} · exposição ${histFmtBRL(h.exposicao)}`;
+    HISTORICO.push(h);
   }
+  const dts=new Date(2026,6,2,9,41).getTime();
+  HISTORICO.unshift({ id:'duofrio', razao:'Refrigeração Duo Frio Com. e Imp. S.A.', cnpj:'01.754.239/0001-90', criador:'Marina Costa', fidcId:'f1', ts:dts, data:histFmtDT(dts), score:71, rating:histRating(71), exposicao:5000000, statusAprov:'gerado', decisaoAnalista:null, justificativa:'', gestorDecisao:null, gestorJustificativa:'', analistaTs:null, gestorTs:null, resumo:'Score 71/100 · risco moderado · exposição R$ 5.000.000,00', isDuo:true });
 })();
 let HIST_STATE={ page:1, perPage:10, sortKey:'data', sortDir:-1, busca:'', sel:new Set() };
 function histFiltradosOrdenados(){
   const q=(HIST_STATE.busca||'').trim().toLowerCase();
   let arr=HISTORICO.filter(h=> !q || (h.razao+' '+h.cnpj+' '+h.criador).toLowerCase().includes(q));
   const k=HIST_STATE.sortKey, dir=HIST_STATE.sortDir;
-  const val=h=> k==='exposicao'?h.exposicao : k==='data'?h.ts : k==='rating'?HIST_RORD.indexOf(h.rating) : String(h[k]||'').toLowerCase();
+  const val=h=> k==='exposicao'?h.exposicao : k==='data'?h.ts : k==='rating'?HIST_RORD.indexOf(h.rating) : k==='status'?APR_ORD.indexOf(h.statusAprov) : String(h[k]||'').toLowerCase();
   arr.sort((a,b)=>{ const va=val(a),vb=val(b); return va<vb?-dir : va>vb?dir : 0; });
   return arr;
 }
@@ -2931,10 +3497,11 @@ function renderHist(){
       +`<td class="hmono">${h.cnpj}</td>`
       +`<td>${h.criador}</td>`
       +`<td class="hmono">${h.data}</td>`
+      +`<td>${aprPill(h.statusAprov)}</td>`
       +`<td class="hcol-right hmono">${histFmtBRL(h.exposicao)}</td>`
       +`<td class="hcol-right"><button class="hacessar" onclick="histAcessar('${h.id}')">Acessar ${arrow}</button></td>`
       +`</tr>`;
-  }).join('') : '<tr><td colspan="7" class="mini" style="padding:22px 12px;text-align:center">Nenhum dossiê encontrado com os filtros atuais.</td></tr>';
+  }).join('') : '<tr><td colspan="8" class="mini" style="padding:22px 12px;text-align:center">Nenhum dossiê encontrado com os filtros atuais.</td></tr>';
   document.getElementById('hist-range').textContent = total ? `Exibindo ${start+1} a ${Math.min(start+pp,total)} de ${total} itens` : 'Nenhum item';
   const pg=document.getElementById('hist-pages'); const cur=HIST_STATE.page;
   let ph=`<button class="pgbtn" onclick="histPage(${cur-1})"${cur<=1?' disabled':''}>←</button>`;
@@ -2962,10 +3529,10 @@ function histExcluir(){ const n=HIST_STATE.sel.size; if(!n) return; if(!confirm(
 function histRefazer(){ const n=HIST_STATE.sel.size; if(!n) return; alert(`Protótipo: refazendo ${n} dossiê(s) — uma nova consulta às fontes seria disparada para cada um, mantendo a política de risco vigente.`); }
 function histAcessar(id){ goCockpitDossie(); }
 function goHistorico(){
-  ['home','policy','dossier','cockpit','cockpitan','carteiras'].forEach(id=>document.getElementById(id).style.display='none');
+  ['home','policy','dossier','cockpit','cockpitan','carteiras','auditoria','monitoramento','aprovacoes'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('subnav').style.display='none';
   document.getElementById('historico').style.display='block';
-  ['nav-novo','nav-pol','nav-cockpit','nav-cockpit-an','nav-cart'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  ['nav-novo','nav-pol','nav-cockpit','nav-cockpit-an','nav-cart','nav-aud','nav-mon','nav-aprov'].forEach(id=>document.getElementById(id).classList.remove('on'));
   document.getElementById('nav-hist').classList.add('on');
   renderHist();
   window.scrollTo(0,0);
@@ -2996,19 +3563,23 @@ function carteiraNome(id){ const k=CARTEIRAS_CL.find(x=>x.id===id); return k?k.n
 function clExposicaoTotal(id){ return CLIENTES.filter(c=>c.carteiraId===id).reduce((a,c)=>a+c.exposicao,0); }
 function clCount(id){ return CLIENTES.filter(c=>c.carteiraId===id).length; }
 /* ---- cards de carteiras ---- */
+let CART_SEL=new Set();
 function renderCarteirasCards(){
   const g=document.getElementById('cart-grid'); if(!g) return;
   const arrow='<span class="cc-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>';
   g.innerHTML = CARTEIRAS_CL.map(k=>{
     const sel = CL_STATE.carteira===k.id ? ' sel' : '';
     return `<div class="cartcard${sel}" onclick="carteiraAbrir('${k.id}')">`
+      +`<div class="cc-top" style="justify-content:flex-end">${arrow}</div>`
       +`<div class="cc-nome">${k.nome}</div>`
       +`<div class="cc-count">${clCount(k.id)} CNPJs</div>`
       +`<div class="cc-lbl">Exposição total</div>`
       +`<div class="cc-exp">${histFmtBRL(clExposicaoTotal(k.id))}</div>`
-      +arrow+`</div>`;
+      +`</div>`;
   }).join('');
 }
+function cartSelToggle(id, el){ if(el&&el.checked) CART_SEL.add(id); else CART_SEL.delete(id); }
+function monCartBtnState(){}
 function carteiraAbrir(id){
   CL_STATE.carteira=id; CL_STATE.page=1;
   document.getElementById('cart-det-nome').textContent=carteiraNome(id);
@@ -3187,12 +3758,252 @@ function clConfirmarAgrupar(){
   fecharModal('modalagrupar'); clPopularSelects(); renderCarteirasCards(); renderClientes();
 }
 function goCarteiras(){
-  ['home','policy','dossier','cockpit','cockpitan','historico'].forEach(id=>document.getElementById(id).style.display='none');
+  ['home','policy','dossier','cockpit','cockpitan','historico','auditoria','monitoramento','aprovacoes'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('subnav').style.display='none';
   document.getElementById('carteiras').style.display='block';
-  ['nav-novo','nav-pol','nav-cockpit','nav-cockpit-an','nav-hist'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  ['nav-novo','nav-pol','nav-cockpit','nav-cockpit-an','nav-hist','nav-aud','nav-mon'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  document.getElementById('nav-aprov').classList.remove('on');
   document.getElementById('nav-cart').classList.add('on');
-  clPopularSelects(); renderCarteirasCards(); renderClientes();
+  const gestor = PERFIL==='gestor';
+  document.getElementById('cart-gestor-view').style.display = gestor?'block':'none';
+  document.getElementById('cart-analista-view').style.display = gestor?'none':'block';
+  if(gestor){
+    document.getElementById('cfidc-detail').style.display='none';
+    document.getElementById('cfidc-list').style.display='block';
+    renderCfidcList();
+  } else {
+    clPopularSelects(); renderCarteirasCards(); renderClientes();
+  }
+  window.scrollTo(0,0);
+}
+
+/* =================== AUDITORIA =================== */
+const AUD_USERS=[
+  {nome:'Waldick Soriano', cargo:'Gestor de crédito'},
+  {nome:'Marina Costa', cargo:'Analista de crédito'},
+  {nome:'Bruno Alves', cargo:'Analista de crédito'},
+  {nome:'Mauro Gomes', cargo:'Analista de crédito'},
+  {nome:'Camila Duarte', cargo:'Analista de crédito'},
+  {nome:'Sistema', cargo:'Processo automático'}
+];
+const AUD_CATS={acesso:'Acesso', dossie:'Dossiê', politica:'Política', carteira:'Carteira', cliente:'Cliente', exportacao:'Exportação'};
+// modelos de evento: [categoria, ação, gerador de detalhe, resultado?]
+const AUD_EVENTOS=[
+  ['acesso','Login no sistema', ()=>'Autenticação via SSO corporativo','ok'],
+  ['acesso','Logout', ()=>'Encerramento de sessão','ok'],
+  ['acesso','Sessão expirada por inatividade', ()=>'Timeout após 30 min','ok'],
+  ['acesso','Tentativa de acesso negada', ()=>'Perfil sem permissão para o recurso solicitado','neg'],
+  ['dossie','Gerou dossiê', i=>'CNPJ '+histCnpj(i+3)+' · plano Completo','ok'],
+  ['dossie','Acessou dossiê', i=>'CNPJ '+histCnpj(i+7)+' · Refrigeração Duo Frio','ok'],
+  ['dossie','Registrou parecer', ()=>'Decisão: Aprovar com ressalvas · limite R$ 5.000.000,00','ok'],
+  ['dossie','Exportou dossiê (PDF)', i=>'CNPJ '+histCnpj(i+2),'ok'],
+  ['dossie','Refez dossiê', i=>'CNPJ '+histCnpj(i+5)+' · nova consulta às fontes','ok'],
+  ['politica','Alterou política de risco', ()=>'Nova versão v1.3 (rascunho) — pendente de dupla custódia','ok'],
+  ['politica','Aprovou política (dupla custódia)', ()=>'Política v1.3 publicada','ok'],
+  ['politica','Ativou indicador-chave', ()=>'Indicador: Autoliquidação sacado≠portador','ok'],
+  ['politica','Criou regra', ()=>'Score Positivo PJ < 300 = Alerta','ok'],
+  ['carteira','Criou carteira', ()=>'Carteira: Grandes contas','ok'],
+  ['carteira','Renomeou carteira', ()=>'"Sudeste 1" → "Sudeste"','ok'],
+  ['carteira','Excluiu carteira', ()=>'Carteira removida — 8 clientes desagrupados','ok'],
+  ['carteira','Agrupou clientes em carteira', ()=>'12 clientes → carteira Nordeste','ok'],
+  ['cliente','Cadastrou cliente', i=>'CNPJ '+histCnpj(i+11),'ok'],
+  ['cliente','Importou planilha', ()=>'34 CNPJs importados via Excel','ok'],
+  ['cliente','Excluiu cliente', i=>'CNPJ '+histCnpj(i+9),'ok'],
+  ['exportacao','Exportou histórico (CSV)', ()=>'50 registros','ok'],
+  ['exportacao','Exportou trilha de auditoria', ()=>'Período completo','ok']
+];
+function audIP(i){ const b=[189,177,200,201,187][i%5]; return b+'.'+((i*13)%250+2)+'.'+((i*29)%250+1)+'.'+((i*7)%250+1); }
+let AUDIT=[];
+(function(){
+  const base=new Date(2026,6,2,9,41).getTime();
+  for(let i=0;i<72;i++){
+    const ev=AUD_EVENTOS[(i*5)%AUD_EVENTOS.length];
+    // "Sistema" só executa eventos automáticos (sessão expirada, alguns)
+    let uIdx=i%5; if(ev[1].includes('Sessão expirada')) uIdx=5;
+    const ts=base - i*(3600000*3.7|0) - (i%9)*420000;
+    AUDIT.push({ id:'a'+i, ts, data:histFmtDT(ts), usuario:AUD_USERS[uIdx].nome, cargo:AUD_USERS[uIdx].cargo, categoria:ev[0], catLabel:AUD_CATS[ev[0]], acao:ev[1], detalhe:ev[2](i), resultado:ev[3], ip:audIP(i) });
+  }
+})();
+let AUD_STATE={ page:1, perPage:15, sortKey:'ts', sortDir:-1, busca:'', cat:'all', user:'all' };
+function audInitFiltros(){
+  const c=document.getElementById('aud-filt-cat');
+  if(c && !c.dataset.done){ c.innerHTML='<option value="all">Todas as categorias</option>'+Object.keys(AUD_CATS).map(k=>`<option value="${k}">${AUD_CATS[k]}</option>`).join(''); c.dataset.done='1'; }
+  const u=document.getElementById('aud-filt-user');
+  if(u && !u.dataset.done){ const nomes=[...new Set(AUDIT.map(a=>a.usuario))]; u.innerHTML='<option value="all">Todos os usuários</option>'+nomes.map(n=>`<option value="${n}">${n}</option>`).join(''); u.dataset.done='1'; }
+}
+function audFiltrados(){
+  const q=(AUD_STATE.busca||'').trim().toLowerCase();
+  let arr=AUDIT.filter(a=>
+    (AUD_STATE.cat==='all'||a.categoria===AUD_STATE.cat) &&
+    (AUD_STATE.user==='all'||a.usuario===AUD_STATE.user) &&
+    (!q || (a.usuario+' '+a.acao+' '+a.detalhe+' '+a.catLabel+' '+a.ip).toLowerCase().includes(q))
+  );
+  const k=AUD_STATE.sortKey, dir=AUD_STATE.sortDir;
+  const val=a=> k==='ts'?a.ts : String(a[k]||'').toLowerCase();
+  arr.sort((x,y)=>{ const a=val(x),b=val(y); return a<b?-dir:a>b?dir:0; });
+  return arr;
+}
+function audSliceInfo(){
+  const arr=audFiltrados(), total=arr.length, pp=AUD_STATE.perPage, pages=Math.max(1,Math.ceil(total/pp));
+  if(AUD_STATE.page>pages) AUD_STATE.page=pages;
+  const start=(AUD_STATE.page-1)*pp;
+  return {arr,total,pp,pages,start,slice:arr.slice(start,start+pp)};
+}
+function renderAud(){
+  const tb=document.getElementById('aud-tbody'); if(!tb) return;
+  const {total,pp,pages,start,slice}=audSliceInfo();
+  tb.innerHTML = slice.length ? slice.map(a=>{
+    const neg = a.resultado==='neg' ? '<span class="audneg">NEGADO</span>' : '';
+    return `<tr>`
+      +`<td class="hmono" style="white-space:nowrap">${a.data}</td>`
+      +`<td><div class="aud-u">${a.usuario}</div><div class="aud-r">${a.cargo}</div></td>`
+      +`<td><span class="audcat audcat-${a.categoria}">${a.catLabel}</span></td>`
+      +`<td class="hrazao" style="font-weight:500">${a.acao}${neg}</td>`
+      +`<td><span class="auddet">${a.detalhe}</span></td>`
+      +`<td class="hmono">${a.ip}</td>`
+      +`</tr>`;
+  }).join('') : '<tr><td colspan="6" class="mini" style="padding:22px 12px;text-align:center">Nenhum evento encontrado com os filtros atuais.</td></tr>';
+  document.getElementById('aud-range').textContent = total?`Exibindo ${start+1} a ${Math.min(start+pp,total)} de ${total} eventos`:'Nenhum evento';
+  const pg=document.getElementById('aud-pages'), cur=AUD_STATE.page;
+  let ph=`<button class="pgbtn" onclick="audPage(${cur-1})"${cur<=1?' disabled':''}>←</button>`;
+  let s=Math.max(1,cur-2), e=Math.min(pages,s+4); s=Math.max(1,e-4);
+  for(let p=s;p<=e;p++) ph+=`<button class="pgbtn${p===cur?' on':''}" onclick="audPage(${p})">${p}</button>`;
+  ph+=`<button class="pgbtn" onclick="audPage(${cur+1})"${cur>=pages?' disabled':''}>→</button>`;
+  pg.innerHTML=ph;
+}
+function audSort(k){ if(AUD_STATE.sortKey===k) AUD_STATE.sortDir*=-1; else { AUD_STATE.sortKey=k; AUD_STATE.sortDir = k==='ts'?-1:1; } renderAud(); }
+function audPage(p){ const {pages}=audSliceInfo(); AUD_STATE.page=Math.min(Math.max(1,p),pages); renderAud(); }
+function audPerPage(v){ AUD_STATE.perPage=+v; AUD_STATE.page=1; renderAud(); }
+function audSetBusca(v){ AUD_STATE.busca=v; AUD_STATE.page=1; renderAud(); }
+function audSetCat(v){ AUD_STATE.cat=v; AUD_STATE.page=1; renderAud(); }
+function audSetUser(v){ AUD_STATE.user=v; AUD_STATE.page=1; renderAud(); }
+function audExportar(){
+  const arr=audFiltrados();
+  const esc=s=>'"'+String(s).replace(/"/g,'""')+'"';
+  const linhas=[['Data e hora','Usuário','Cargo','Categoria','Ação','Detalhe','Origem (IP)','Resultado']]
+    .concat(arr.map(a=>[a.data,a.usuario,a.cargo,a.catLabel,a.acao,a.detalhe,a.ip,a.resultado==='neg'?'Negado':'Sucesso']));
+  const csv=linhas.map(r=>r.map(esc).join(';')).join('\n');
+  baixar('auditoria_'+new Date().toISOString().slice(0,10)+'.csv','text/csv',csv);
+}
+function goAuditoria(){
+  ['home','policy','dossier','cockpit','cockpitan','historico','carteiras','monitoramento','aprovacoes'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('subnav').style.display='none';
+  document.getElementById('auditoria').style.display='block';
+  ['nav-novo','nav-pol','nav-cockpit','nav-cockpit-an','nav-hist','nav-cart','nav-mon','nav-aprov'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  document.getElementById('nav-aud').classList.add('on');
+  audInitFiltros(); renderAud();
+  window.scrollTo(0,0);
+}
+
+/* =================== MONITORAMENTO =================== */
+const RECORR=[{v:'diaria',l:'Diária',dias:1},{v:'semanal',l:'Semanal',dias:7},{v:'quinzenal',l:'Quinzenal',dias:15},{v:'mensal',l:'Mensal',dias:30},{v:'trimestral',l:'Trimestral',dias:90}];
+function recLabel(v){ const r=RECORR.find(x=>x.v===v); return r?r.l:v; }
+function monProxima(v){ const base=new Date(2026,6,2,9,0); const d=RECORR.find(x=>x.v===v); base.setDate(base.getDate()+(d?d.dias:30)); return base.getTime(); }
+let MON_SEQ=0;
+let MONITORAMENTOS=[
+  {id:'m'+(MON_SEQ++), nome:'FIDCs em atenção', fidcIds:['f3','f5','f7','f8'], recorrencia:'semanal', proximaTs:monProxima('semanal')},
+  {id:'m'+(MON_SEQ++), nome:'Grandes fundos — consignado e agro', fidcIds:['f2','f4','f6'], recorrencia:'mensal', proximaTs:monProxima('mensal')}
+];
+let MON_EDIT_ID=null;
+/* Monitoramento opera sobre os FIDCs do portfólio (FIDCS), reusando o dashboard consolidado do gestor. */
+function monFidcs(m){ return FIDCS.filter(f=>m.fidcIds.includes(f.id)); }
+function renderMonCards(){
+  const g=document.getElementById('mon-grid'); if(!g) return;
+  const arrow='<span class="cc-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>';
+  if(!MONITORAMENTOS.length){ g.innerHTML='<div class="card" style="grid-column:1/-1"><div class="mini" style="padding:6px 2px">Nenhum monitoramento criado ainda. Use “Novo monitoramento” para acompanhar um grupo de FIDCs.</div></div>'; return; }
+  g.innerHTML = MONITORAMENTOS.map(m=>{
+    const fl=monFidcs(m);
+    const pl=fl.reduce((a,f)=>a+f.pl,0);
+    const alerta=fl.filter(f=>f.status!=='saudavel').length;
+    return `<div class="cartcard" onclick="monAbrir('${m.id}')">`
+      +`<div class="cc-top"><span class="audcat audcat-dossie">${recLabel(m.recorrencia)}</span>${arrow}</div>`
+      +`<div class="cc-nome">${m.nome}</div>`
+      +`<div class="cc-count">${fl.length} FIDCs${alerta?` · <span style="color:var(--amb)">${alerta} em atenção</span>`:''}</div>`
+      +`<div class="cc-lbl">PL do grupo</div>`
+      +`<div class="cc-exp">${fidcMi(pl)}</div>`
+      +`<div class="cc-lbl" style="margin-top:8px">próxima reconsulta · ${histFmtDT(m.proximaTs).split(' | ')[0]}</div>`
+      +`</div>`;
+  }).join('');
+}
+function monAbrir(id){
+  const m=MONITORAMENTOS.find(x=>x.id===id); if(!m) return;
+  MON_EDIT_ID=m.id;
+  document.getElementById('mon-list-view').style.display='none';
+  document.getElementById('mon-detail-view').style.display='block';
+  document.getElementById('mon-det-nome').textContent=m.nome;
+  document.getElementById('mon-det-rec').textContent=recLabel(m.recorrencia);
+  const fl=monFidcs(m);
+  renderFidcDash(fl, 'monf', {clickable:false, escopo:'reconsulta '+recLabel(m.recorrencia).toLowerCase(), fidcIds:m.fidcIds});
+  document.getElementById('mon-analitico').innerHTML = `<div class="card"><div class="htblwrap"><table class="htbl" style="min-width:720px"><thead><tr><th>FIDC</th><th>CNPJ</th><th class="hcol-right">PL</th><th class="hcol-right">Exposição</th><th class="hcol-right">Inadimpl.</th><th class="hcol-right">Subord.</th><th>Situação</th></tr></thead><tbody>`
+    + fl.map(f=>{
+        const below=f.subord<f.subordMin;
+        return `<tr><td class="hrazao">${f.nome}<div class="mini">${f.gestora} · ${f.classe}</div></td><td class="hmono">${f.cnpj}</td><td class="hcol-right hmono">${fidcMi(f.pl)}</td><td class="hcol-right hmono">${fidcMi(f.exp)}</td><td class="hcol-right hmono" style="color:${f.inad>=5?'var(--red)':f.inad>=3?'var(--amb)':'var(--grn)'}">${fidcPct(f.inad)}</td><td class="hcol-right hmono" style="color:${below?'var(--red)':'inherit'}">${fidcPct(f.subord)} <span class="mut" style="font-size:10px">/ ${fidcPct(f.subordMin)}</span></td><td><span class="badge ${FIDC_STATUS[f.status].cls}">${FIDC_STATUS[f.status].lbl}</span></td></tr>`;
+      }).join('')
+    + `</tbody></table></div></div>`;
+  window.scrollTo(0,0);
+}
+function monVoltar(){ document.getElementById('mon-detail-view').style.display='none'; document.getElementById('mon-list-view').style.display='block'; renderMonCards(); }
+function monPopularRecorr(){ const s=document.getElementById('mon-recorr'); if(s) s.innerHTML=RECORR.map(r=>`<option value="${r.v}">${r.l}</option>`).join(''); }
+function monRenderCartList(selSet){
+  const box=document.getElementById('mon-cart-list'); if(!box) return;
+  box.innerHTML = FIDCS.map(f=>{
+    const on=selSet.has(f.id)?' checked':'';
+    return `<label style="display:flex;align-items:center;gap:9px;cursor:pointer;font-size:13px"><input type="checkbox" value="${f.id}"${on} style="width:16px;height:16px;accent-color:var(--cyan)"><span style="color:#fff">${f.nome}</span><span class="mini" style="margin-left:auto">${fidcMi(f.pl)}</span></label>`;
+  }).join('');
+}
+function monModalCartSel(){ return new Set([...document.querySelectorAll('#mon-cart-list input:checked')].map(el=>el.value)); }
+function monNovo(){
+  MON_EDIT_ID=null;
+  document.getElementById('mon-modal-title').textContent='Novo monitoramento';
+  document.getElementById('mon-nome').value='';
+  monPopularRecorr(); document.getElementById('mon-recorr').value='mensal';
+  monRenderCartList(new Set());
+  document.getElementById('mon-modal-del').style.display='none';
+  document.getElementById('modalmon').style.display='flex';
+  setTimeout(()=>document.getElementById('mon-nome').focus(),30);
+}
+function monEditar(){
+  const m=MONITORAMENTOS.find(x=>x.id===MON_EDIT_ID); if(!m) return;
+  document.getElementById('mon-modal-title').textContent='Editar monitoramento';
+  document.getElementById('mon-nome').value=m.nome;
+  monPopularRecorr(); document.getElementById('mon-recorr').value=m.recorrencia;
+  monRenderCartList(new Set(m.fidcIds));
+  document.getElementById('mon-modal-del').style.display='';
+  document.getElementById('modalmon').style.display='flex';
+}
+function monSalvar(){
+  const nome=document.getElementById('mon-nome').value.trim();
+  const sel=[...monModalCartSel()];
+  const rec=document.getElementById('mon-recorr').value;
+  if(!nome){ alert('Informe o nome do monitoramento.'); return; }
+  if(!sel.length){ alert('Selecione ao menos um FIDC para monitorar.'); return; }
+  if(MON_EDIT_ID && MONITORAMENTOS.some(x=>x.id===MON_EDIT_ID)){
+    const m=MONITORAMENTOS.find(x=>x.id===MON_EDIT_ID);
+    m.nome=nome; m.fidcIds=sel; m.recorrencia=rec; m.proximaTs=monProxima(rec);
+    fecharModal('modalmon'); monAbrir(m.id);
+  } else {
+    const m={id:'m'+(MON_SEQ++), nome, fidcIds:sel, recorrencia:rec, proximaTs:monProxima(rec)};
+    MONITORAMENTOS.push(m);
+    fecharModal('modalmon');
+    goMonitoramento(); monAbrir(m.id);
+  }
+}
+function monExcluir(){
+  const m=MONITORAMENTOS.find(x=>x.id===MON_EDIT_ID); if(!m) return;
+  if(!confirm(`Excluir o monitoramento "${m.nome}"? A reconsulta recorrente deixa de ser executada. (Os FIDCs não são afetados.)`)) return;
+  MONITORAMENTOS=MONITORAMENTOS.filter(x=>x.id!==m.id);
+  MON_EDIT_ID=null;
+  fecharModal('modalmon'); monVoltar();
+}
+function goMonitoramento(){
+  ['home','policy','dossier','cockpit','cockpitan','historico','carteiras','auditoria','aprovacoes'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('subnav').style.display='none';
+  document.getElementById('monitoramento').style.display='block';
+  ['nav-novo','nav-pol','nav-cockpit','nav-cockpit-an','nav-hist','nav-cart','nav-aud','nav-aprov'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  document.getElementById('nav-mon').classList.add('on');
+  document.getElementById('mon-detail-view').style.display='none';
+  document.getElementById('mon-list-view').style.display='block';
+  renderMonCards();
   window.scrollTo(0,0);
 }
 
@@ -3298,6 +4109,248 @@ function renderCockpitInsights(C, prefix){
     `<li class="insight" style="cursor:default"><span class="sevdot op"></span><span class="mtx"><b>${r.gval}</b> (${r.dimLabel}, n=${r.n}) apresenta perfil mais saudável que a média da carteira: ${ckFraseIndicadores(r.itens,3)}. Bom candidato para originação direcionada.</span></li>`
   ).join('') : '<li class="insight" style="cursor:default"><span class="mtx">Nenhum segmento se destaca positivamente neste recorte no momento.</span></li>';
 }
+
+/* =================== PORTFÓLIO DE FIDCs (visão do gestor) =================== */
+let FIDCS=[
+  {id:'f1', nome:'Recebíveis Alfa FIDC',        gestora:'Alfa Gestão de Recursos',  cnpj:'23.114.507/0001-08', pl:128, exp:96,  cedentes:42, inad:2.1, subord:22.5, subordMin:18, rent:118, classe:'Multicedente/Multissacado', rating:'AA',  status:'saudavel', concTop:14, setor:'Indústria'},
+  {id:'f2', nome:'Consignado Beta FIDC',        gestora:'Beta Asset',               cnpj:'31.882.640/0001-77', pl:340, exp:300, cedentes:12, inad:1.2, subord:25.0, subordMin:20, rent:121, classe:'Crédito consignado',       rating:'AAA', status:'saudavel', concTop:9,  setor:'Consignado'},
+  {id:'f3', nome:'Fomento Sul FIDC',            gestora:'Sul Capital',              cnpj:'09.457.213/0001-51', pl:74,  exp:61,  cedentes:58, inad:4.8, subord:15.2, subordMin:15, rent:112, classe:'Fomento mercantil',        rating:'A',   status:'atencao',  concTop:22, setor:'Atacado'},
+  {id:'f4', nome:'AgroRecebíveis Gama FIDC',    gestora:'Gama Investimentos',       cnpj:'17.630.985/0001-32', pl:210, exp:165, cedentes:30, inad:3.1, subord:19.0, subordMin:16, rent:116, classe:'Agronegócio',              rating:'AA',  status:'saudavel', concTop:18, setor:'Agro'},
+  {id:'f5', nome:'Varejo Prime FIDC',           gestora:'Prime Gestão',             cnpj:'28.045.176/0001-64', pl:96,  exp:80,  cedentes:24, inad:6.2, subord:13.5, subordMin:15, rent:109, classe:'Cartão e varejo',          rating:'BBB', status:'critico',  concTop:27, setor:'Varejo'},
+  {id:'f6', nome:'Saúde Recebíveis Delta FIDC', gestora:'Delta Asset',              cnpj:'05.913.428/0001-19', pl:152, exp:120, cedentes:18, inad:2.7, subord:21.0, subordMin:18, rent:119, classe:'Saúde',                    rating:'AA',  status:'saudavel', concTop:16, setor:'Saúde'},
+  {id:'f7', nome:'Logística Epsilon FIDC',      gestora:'Epsilon Capital',          cnpj:'34.721.660/0001-45', pl:68,  exp:52,  cedentes:20, inad:3.9, subord:17.0, subordMin:16, rent:114, classe:'Transporte e logística',   rating:'A',   status:'atencao',  concTop:24, setor:'Transporte'},
+  {id:'f8', nome:'TechFin Zeta FIDC',           gestora:'Zeta Asset',               cnpj:'41.208.933/0001-90', pl:44,  exp:38,  cedentes:35, inad:5.4, subord:16.0, subordMin:16, rent:111, classe:'Antecipação / fintech',    rating:'BBB', status:'atencao',  concTop:20, setor:'Serviços B2B'},
+];
+(function(){ FIDCS.forEach((f,i)=>{ const base=f.pl; f.plTrend=[0,1,2,3,4,5].map(k=>Math.round((base*(0.9+0.02*k))*(1+((i*7+k*3)%5-2)/100))); }); })();
+const FIDC_STATUS={saudavel:{lbl:'Saudável',cls:'b-grn',cor:'#9fdaa8'}, atencao:{lbl:'Em atenção',cls:'b-amb',cor:'#ffe28b'}, critico:{lbl:'Crítico',cls:'b-red',cor:'#ff9b9b'}};
+function fidcById(id){ return FIDCS.find(f=>f.id===id); }
+function fidcNome(id){ const f=fidcById(id); return f?f.nome:'—'; }
+function fidcCnpj(id){ const f=fidcById(id); return f?f.cnpj:''; }
+function fidcMi(v){ return 'R$ '+Math.round(Number(v)*1000000).toLocaleString('pt-BR'); }
+function fidcPct(v){ return Number(v).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%'; }
+
+function ckfFiltrar(){ const v=document.getElementById('ckf-filtro').value; renderFidcDash(v==='all'?FIDCS:FIDCS.filter(f=>f.id===v), 'ckf', {clickable:true, escopo: v==='all'?'todos os FIDCs':fidcNome(v)}); }
+function ckfFocus(id){ const s=document.getElementById('ckf-filtro'); if(s){ s.value=id; ckfFiltrar(); window.scrollTo({top:0,behavior:'smooth'}); } }
+function ckfPopular(){ const s=document.getElementById('ckf-filtro'); if(s && !s.dataset.done){ s.innerHTML='<option value="all">Todos os FIDCs</option>'+FIDCS.map(f=>`<option value="${f.id}">${f.nome}</option>`).join(''); s.dataset.done='1'; } }
+
+function renderFidcDash(FL, prefix, opts){
+  opts=opts||{};
+  const $=id=>document.getElementById(prefix+'-'+id);
+  const info=t=>`<span class="info" data-tip="${t}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>`;
+  const bar=(lbl,pct,val,cor)=>`<div class="fbar"><div class="fbar-t"><span class="fbar-l">${lbl}</span><span class="fbar-v">${val}</span></div><div class="barh"><i style="width:${Math.max(3,Math.min(100,pct))}%;background:${cor||'#7fd1fb'}"></i></div></div>`;
+  const sumPL=FL.reduce((a,f)=>a+f.pl,0), sumExp=FL.reduce((a,f)=>a+f.exp,0), sumCed=FL.reduce((a,f)=>a+f.cedentes,0);
+  const wInad = sumExp ? FL.reduce((a,f)=>a+f.inad*f.exp,0)/sumExp : 0;
+  const emAtencao=FL.filter(f=>f.status!=='saudavel').length;
+
+  const subEl=$('sub');
+  if(subEl) subEl.textContent = `${FL.length} FIDC(s)${opts.escopo?' · '+opts.escopo:''} · PL ${fidcMi(sumPL)} · ${sumCed} cedentes · atualizado em 11/07/2026 · dados de exemplo`;
+
+  if(!FL.length){ ['kpis','insights-risco','insights-oport','radar','ranking','porfidc','classe','status','inad','subord','rent','tend','enq','custo','comite'].forEach(k=>{const e=$(k); if(e) e.innerHTML='<div class="mini">Nenhum FIDC neste recorte.</div>';}); return; }
+
+  /* KPIs */
+  const inadBadge = wInad<3?'b-grn':wInad<5?'b-amb':'b-red';
+  const kcol={'b-grn':'var(--grn)','b-amb':'var(--amb)','b-red':'var(--red)','b-cyn':'var(--cyan)'};
+  const kpis=[
+    {t:'FIDCs sob gestão', v:FL.length, ctx:`${sumCed} cedentes no total`, badge:'b-cyn', tip:'Fundos (clientes) na carteira da asset no recorte atual.'},
+    {t:'PL consolidado', v:fidcMi(sumPL), ctx:'patrimônio líquido sob gestão', badge:'b-cyn', tip:'Soma do patrimônio líquido dos FIDCs exibidos.'},
+    {t:'Direitos creditórios', v:fidcMi(sumExp), ctx:`${sumPL?Math.round(sumExp/sumPL*100):0}% do PL alocado em carteira`, badge:null, tip:'Exposição total em direitos creditórios (carteira dos fundos).'},
+    {t:'Inadimplência média', v:fidcPct(wInad), ctx:'ponderada pela exposição · +90d', badge:inadBadge, tip:'Inadimplência média ponderada pela exposição de cada FIDC.'},
+  ];
+  $('kpis').innerHTML=kpis.map(k=>{const col=kcol[k.badge]?`;color:${kcol[k.badge]}`:''; return `<div class="card"><h4>${k.t}${k.tip?info(k.tip):''}</h4><div class="big" style="font-size:17px${col}">${k.v}</div><div class="mut">${k.ctx}</div></div>`;}).join('');
+
+  /* Insights */
+  const risco=[], oport=[];
+  FL.forEach(f=>{
+    if(f.subord<f.subordMin) risco.push({sev:'crit',txt:`<b>${f.nome}</b> está com subordinação de <b>${fidcPct(f.subord)}</b>, <b>abaixo do mínimo</b> de ${fidcPct(f.subordMin)} do regulamento.`,id:f.id});
+    else if(f.subord<=f.subordMin+1.5) risco.push({sev:'alto',txt:`<b>${f.nome}</b> opera no piso de subordinação (${fidcPct(f.subord)} vs. mín. ${fidcPct(f.subordMin)}) — pouca folga para absorver perdas.`,id:f.id});
+    if(f.inad>=5) risco.push({sev:'alto',txt:`<b>${f.nome}</b> tem inadimplência de <b>${fidcPct(f.inad)}</b>, acima do apetite do portfólio.`,id:f.id});
+    if(f.concTop>=25) risco.push({sev:'info',txt:`<b>${f.nome}</b>: maior cedente concentra <b>${f.concTop}%</b> da carteira — risco de concentração.`,id:f.id});
+    if(f.subord>=f.subordMin+4 && f.inad<3) oport.push({sev:'info',txt:`<b>${f.nome}</b> tem folga de subordinação (${fidcPct(f.subord)} vs. mín. ${fidcPct(f.subordMin)}) e baixa inadimplência — espaço para originar.`,id:f.id});
+    if(f.rent>=118) oport.push({sev:'info',txt:`<b>${f.nome}</b> entrega <b>${f.rent}% do CDI</b> à cota sênior, acima da meta do portfólio.`,id:f.id});
+  });
+  const liItem=(it,go)=>`<li class="insight"${go?` onclick="${go}"`:' style="cursor:default"'}><span class="sevdot ${it.sev}"></span><span class="mtx">${it.txt}</span>${go?`<span class="golink">ver FIDC <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>`:''}</li>`;
+  const clk=id=>opts.clickable?`ckfFocus('${id}')`:'';
+  $('insights-risco').innerHTML = risco.length?risco.slice(0,6).map(it=>liItem(it,clk(it.id))).join(''):'<li class="insight" style="cursor:default"><span class="mtx">Nenhum sinal de risco relevante neste recorte.</span></li>';
+  $('insights-oport').innerHTML = oport.length?oport.slice(0,6).map(it=>liItem(it,clk(it.id))).join(''):'<li class="insight" style="cursor:default"><span class="mtx">Sem oportunidades destacadas neste recorte.</span></li>';
+
+  /* Radar */
+  const rad=[];
+  FL.filter(f=>f.status==='critico').forEach(f=>rad.push({sev:'crit',txt:`<b>${f.nome}</b> em situação crítica: subordinação ${fidcPct(f.subord)} (mín. ${fidcPct(f.subordMin)}) e inadimplência ${fidcPct(f.inad)}.`,id:f.id}));
+  FL.filter(f=>f.status==='atencao').forEach(f=>rad.push({sev:'alto',txt:`<b>${f.nome}</b> em atenção — acompanhar subordinação e inadimplência de perto.`,id:f.id}));
+  const pend=HISTORICO.filter(h=>h.statusAprov==='analista' && (prefix!=='monf' || (opts.fidcIds&&opts.fidcIds.includes(h.fidcId))) && FL.some(f=>f.id===h.fidcId));
+  if(pend.length) rad.push({sev:'info',txt:`<b>${pend.length} solicitaç${pend.length===1?'ão':'ões'}</b> no comitê aguardando decisão em última instância.`,go:'goAprovacoes()'});
+  const sevOrd={crit:0,alto:1,info:2};
+  rad.sort((a,b)=>sevOrd[a.sev]-sevOrd[b.sev]);
+  $('radar').innerHTML = rad.length?rad.slice(0,8).map(it=>liItem(it, it.go?it.go:clk(it.id))).join(''):'<li class="insight" style="cursor:default"><span class="mtx">Portfólio sob controle — nenhum FIDC exige ação imediata.</span></li>';
+
+  /* Ranking por exposição */
+  const rk=[...FL].sort((a,b)=>b.exp-a.exp); const maxExp=Math.max(...rk.map(f=>f.exp));
+  $('ranking').innerHTML = rk.map(f=>bar(`${f.nome} <span class="badge ${FIDC_STATUS[f.status].cls}" style="padding:1px 6px;font-size:9px">${FIDC_STATUS[f.status].lbl}</span>`, f.exp/maxExp*100, fidcMi(f.exp), FIDC_STATUS[f.status].cor)).join('');
+
+  /* Composição por FIDC (%PL) */
+  const rkPl=[...FL].sort((a,b)=>b.pl-a.pl);
+  $('porfidc').innerHTML = rkPl.map(f=>{const p=Math.round(f.pl/sumPL*100); return bar(f.nome+(p>40?' <span class="badge b-amb" style="padding:1px 6px;font-size:9px">ACIMA DO LIMIAR</span>':''), p, p+'%', p>40?'#ffb020':'#7fd1fb');}).join('');
+  /* Por classe */
+  const byClasse={}; FL.forEach(f=>byClasse[f.classe]=(byClasse[f.classe]||0)+f.pl);
+  $('classe').innerHTML = Object.entries(byClasse).map(([k,v])=>({k,p:Math.round(v/sumPL*100)})).sort((a,b)=>b.p-a.p).map(r=>bar(r.k,r.p,r.p+'%','#c896fa')).join('');
+  /* Por status */
+  $('status').innerHTML = ['saudavel','atencao','critico'].map(s=>{const n=FL.filter(f=>f.status===s).length; const p=Math.round(n/FL.length*100); return bar(FIDC_STATUS[s].lbl,p,`${p}% (${n})`,FIDC_STATUS[s].cor);}).join('');
+
+  /* Inadimplência */
+  const maxInad=Math.max(...FL.map(f=>f.inad),1);
+  $('inad').innerHTML=[...FL].sort((a,b)=>b.inad-a.inad).map(f=>bar(f.nome, f.inad/maxInad*100, fidcPct(f.inad), f.inad>=5?'#ff9b9b':f.inad>=3?'#ffe28b':'#9fdaa8')).join('');
+  /* Subordinação vs mínimo */
+  const maxSub=Math.max(...FL.map(f=>f.subord),1);
+  $('subord').innerHTML=[...FL].sort((a,b)=>a.subord-b.subord).map(f=>{const below=f.subord<f.subordMin, near=f.subord<=f.subordMin+1.5; return bar(f.nome, f.subord/maxSub*100, `${fidcPct(f.subord)} <span class="mut" style="font-size:10px">/ mín ${fidcPct(f.subordMin)}</span>`, below?'#ff9b9b':near?'#ffe28b':'#9fdaa8');}).join('');
+  /* Rentabilidade */
+  const maxRent=Math.max(...FL.map(f=>f.rent),1);
+  $('rent').innerHTML=[...FL].sort((a,b)=>b.rent-a.rent).map(f=>bar(f.nome, f.rent/maxRent*100, f.rent+'% CDI', f.rent>=118?'#9fdaa8':f.rent>=112?'#7fd1fb':'#ffe28b')).join('');
+
+  /* Tendência do PL (sparkline consolidado) */
+  const tEl=$('tend');
+  if(tEl){
+    const series=[0,1,2,3,4,5].map(k=>FL.reduce((a,f)=>a+(f.plTrend?f.plTrend[k]:f.pl),0));
+    const mn=Math.min(...series), mx=Math.max(...series), W=280,H=90,pad=6;
+    const pts=series.map((v,i)=>{const x=pad+i*(W-2*pad)/(series.length-1); const y=H-pad-(mx===mn?H/2:((v-mn)/(mx-mn))*(H-2*pad)); return [x,y];});
+    const path=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+    const delta=series[5]-series[0]; const dpct=series[0]?Math.round(delta/series[0]*100):0;
+    tEl.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><div class="big" style="font-size:19px">${fidcMi(series[5])}</div><div class="badge ${delta>=0?'b-grn':'b-red'}">${delta>=0?'+':''}${dpct}% em 6 meses</div></div><svg viewBox="0 0 ${W} ${H}" width="100%" height="90" preserveAspectRatio="none"><path d="${path}" fill="none" stroke="#7fd1fb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="mut" style="margin-top:4px">PL consolidado nos últimos 6 meses (fev→jul/2026)</div>`;
+  }
+
+  /* Enquadramento / alertas */
+  const enq=[];
+  FL.filter(f=>f.subord<f.subordMin).forEach(f=>enq.push({sev:'crit',txt:`<b>${f.nome}</b>: subordinação ${fidcPct(f.subord)} <b>abaixo do mínimo</b> de ${fidcPct(f.subordMin)} — acionar administrador para reforço de subordinada.`}));
+  FL.filter(f=>f.inad>=5).forEach(f=>enq.push({sev:'alto',txt:`<b>${f.nome}</b>: inadimplência ${fidcPct(f.inad)} ultrapassou o gatilho de reforço de PDD.`}));
+  FL.filter(f=>f.subord>=f.subordMin && f.subord<=f.subordMin+1.5).forEach(f=>enq.push({sev:'info',txt:`<b>${f.nome}</b>: subordinação no piso do regulamento — monitorar semanalmente.`}));
+  const enqEl=$('enq');
+  if(enqEl) enqEl.innerHTML = enq.length?`<ul class="motlist" style="margin:0">${enq.map(it=>`<li class="insight" style="cursor:default"><span class="sevdot ${it.sev}"></span><span class="mtx">${it.txt}</span></li>`).join('')}</ul>`:'<div class="mini">Todos os FIDCs enquadrados nos limites do regulamento.</div>';
+
+  /* Custo consolidado de dados */
+  const custoEl=$('custo');
+  if(custoEl){
+    const consultas=FL.reduce((a,f)=>a+f.cedentes,0)*3;
+    const custoTot=consultas*7.9;
+    custoEl.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:baseline"><div class="big" style="font-size:19px">${histFmtBRL(Math.round(custoTot))}</div><div class="mut">últimos 30 dias</div></div><div class="mut" style="margin-top:6px">${consultas.toLocaleString('pt-BR')} consultas às fontes em ${FL.length} FIDC(s) · média ${histFmtBRL(Math.round(custoTot/FL.length))}/FIDC</div><div style="margin-top:10px">${bar('SERASA',54,'54%','#7fd1fb')}${bar('Central SCR',24,'24%','#c896fa')}${bar('NÚCLEA',15,'15%','#9fdaa8')}${bar('Dados cadastrais',7,'7%','#ffe28b')}</div>`;
+  }
+
+  /* Comitê — decisões recentes (do recorte) */
+  const comEl=$('comite');
+  if(comEl){
+    const ids=FL.map(f=>f.id);
+    const dec=HISTORICO.filter(h=>ids.includes(h.fidcId) && ['gestor','repr_gestor','revisao'].includes(h.statusAprov)).sort((a,b)=>(b.gestorTs||b.ts)-(a.gestorTs||a.ts)).slice(0,5);
+    comEl.innerHTML = dec.length?dec.map(h=>`<div class="aprcard" style="margin-bottom:8px;background:rgba(255,255,255,.03)"><div class="ac-l"><b>${h.razao}</b><div class="acsub">${fidcNome(h.fidcId)} · ${relTime(h.gestorTs||h.ts)}</div></div><div class="ac-r">${aprPill(h.statusAprov)}<div class="acval">${histFmtBRL(h.exposicao)}</div></div></div>`).join(''):'<div class="mini">Nenhuma decisão recente do comitê neste recorte.</div>';
+  }
+}
+
+/* =================== CLIENTES (FIDCs) — página do gestor =================== */
+let CFIDC_SORT={k:'pl', dir:-1};
+const CFIDC_STORD={saudavel:0, atencao:1, critico:2};
+function cfidcSort(k){ if(CFIDC_SORT.k===k) CFIDC_SORT.dir*=-1; else { CFIDC_SORT.k=k; CFIDC_SORT.dir = (k==='nome'||k==='classe'||k==='status')?1:-1; } renderCfidcList(); }
+function renderCfidcList(){
+  const tb=document.getElementById('cfidc-tbody'); if(!tb) return;
+  const k=CFIDC_SORT.k, dir=CFIDC_SORT.dir;
+  const val=f=> k==='status'?CFIDC_STORD[f.status] : (k==='nome'||k==='classe')?String(f[k]).toLowerCase() : f[k];
+  const arr=[...FIDCS].sort((a,b)=>{const x=val(a),y=val(b); return x<y?-dir:x>y?dir:0;});
+  const arrow='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+  tb.innerHTML = arr.map(f=>{
+    const below=f.subord<f.subordMin;
+    return `<tr>`
+      +`<td class="hrazao">${f.nome}<div class="mini">${f.gestora} · rating ${f.rating}</div></td>`
+      +`<td>${f.classe}</td>`
+      +`<td class="hcol-right hmono">${fidcMi(f.pl)}</td>`
+      +`<td class="hcol-right hmono">${fidcMi(f.exp)}</td>`
+      +`<td class="hcol-right hmono" style="color:${f.inad>=5?'var(--red)':f.inad>=3?'var(--amb)':'var(--grn)'}">${fidcPct(f.inad)}</td>`
+      +`<td class="hcol-right hmono" style="color:${below?'var(--red)':'inherit'}">${fidcPct(f.subord)} <span class="mut" style="font-size:10px">/ ${fidcPct(f.subordMin)}</span></td>`
+      +`<td><span class="badge ${FIDC_STATUS[f.status].cls}">${FIDC_STATUS[f.status].lbl}</span></td>`
+      +`<td class="hcol-right"><button class="hacessar" onclick="cfidcAbrir('${f.id}')">Abrir ${arrow}</button></td>`
+      +`</tr>`;
+  }).join('');
+}
+function fidcCarteiras(f){
+  const regs=['Sudeste','Sul','Nordeste','Centro-Oeste'];
+  const seed=parseInt(f.id.slice(1));
+  const n=Math.min(4, Math.max(2, 2+(seed%3)));
+  const wts=[]; let sw=0; for(let i=0;i<n;i++){ const w=3+((seed*7+i*5)%5); wts.push(w); sw+=w; }
+  let cAcc=0, eAcc=0; const out=[];
+  for(let i=0;i<n;i++){
+    const last=i===n-1;
+    const c = last ? f.cedentes-cAcc : Math.max(1, Math.round(f.cedentes*wts[i]/sw));
+    const e = last ? +(f.exp-eAcc).toFixed(1) : +(f.exp*wts[i]/sw).toFixed(1);
+    cAcc+=c; eAcc=+(eAcc+e).toFixed(1);
+    const st = (f.status!=='saudavel' && i===0) ? f.status : 'saudavel';
+    out.push({nome:`${f.setor} · ${regs[i%regs.length]}`, cedentes:c, exp:e, status:st});
+  }
+  return out;
+}
+function fidcCedSample(f, ci, count){
+  const out=[]; const k=parseInt(f.id.slice(1))*13+ci*29;
+  for(let i=0;i<count;i++){
+    out.push({
+      nome: HN_A[(k+i*3)%HN_A.length]+' '+HN_B[(k+i*7)%HN_B.length]+' '+HN_C[(k+i)%HN_C.length],
+      cnpj: histCnpj((k+i*5)%90),
+      exp: HIST_EXP[(k+i)%HIST_EXP.length]
+    });
+  }
+  return out;
+}
+function cfidcAbrir(id){
+  const f=fidcById(id); if(!f) return;
+  document.getElementById('cfidc-list').style.display='none';
+  const box=document.getElementById('cfidc-detail'); box.style.display='block';
+  const below=f.subord<f.subordMin, near=f.subord<=f.subordMin+1.5;
+  const subCor = below?'var(--red)':near?'var(--amb)':'var(--grn)';
+  const info=t=>`<span class="info" data-tip="${t}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>`;
+  const kcard=(t,v,ctx,col,tip)=>`<div class="card"><h4>${t}${tip?info(tip):''}</h4><div class="big" style="font-size:17px${col?';color:'+col:''}">${v}</div><div class="mut">${ctx}</div></div>`;
+  const carts=fidcCarteiras(f);
+  const cartRows=carts.map((c,ci)=>{
+    const amostra=fidcCedSample(f, ci, Math.min(4, c.cedentes));
+    const rows=amostra.map(s=>`<tr><td class="hrazao">${s.nome}</td><td class="hmono">${s.cnpj}</td><td class="hcol-right hmono">${histFmtBRL(s.exp)}</td><td class="hcol-right"><button class="hacessar" onclick="goCockpitDossie()">Acessar dossiê <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button></td></tr>`).join('');
+    const resto=c.cedentes-amostra.length;
+    return `<div class="card" style="margin-bottom:12px"><details><summary style="cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">`
+      +`<span style="display:flex;align-items:center;gap:8px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg><b style="color:#fff">${c.nome}</b> <span class="badge ${FIDC_STATUS[c.status].cls}">${FIDC_STATUS[c.status].lbl}</span></span>`
+      +`<span class="mini">${c.cedentes} cedentes · ${fidcMi(c.exp)}</span></summary>`
+      +`<div class="htblwrap" style="margin-top:10px"><table class="htbl" style="min-width:600px"><thead><tr><th>Cedente (amostra)</th><th>CNPJ</th><th class="hcol-right">Exposição</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`
+      +(resto>0?`<div class="mini" style="margin-top:8px">+${resto} cedentes geridos pelo analista do fundo</div>`:'')
+      +`</details></div>`;
+  }).join('');
+  box.innerHTML = `
+    <div class="clbanner">
+      <span>FIDC: <b>${f.nome}</b></span>
+      <span class="badge ${FIDC_STATUS[f.status].cls}">${FIDC_STATUS[f.status].lbl}</span>
+      <span class="golink" onclick="cfidcVoltar()" style="margin-left:auto"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> ver todos os FIDCs</span>
+    </div>
+    <div class="dhead" style="margin-top:14px"><div class="co"><div>
+      <h2 style="font-size:22px">${f.nome}</h2>
+      <div class="chips">
+        <span class="chip">CNPJ ${f.cnpj}</span><span class="chip">${f.gestora}</span><span class="chip">${f.classe}</span><span class="chip">Rating ${f.rating}</span>
+      </div>
+    </div></div></div>
+    <div class="gactions" style="margin:14px 0">
+      <button class="btn" onclick="cfidcNoCockpit('${f.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg> Ver no cockpit</button>
+      <button class="btn" onclick="cfidcMonitorar('${f.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Monitorar</button>
+      <button class="btn" onclick="goAprovacoes()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> Comitê</button>
+    </div>
+    <div class="subhdr">Indicadores do fundo</div>
+    <div class="g4fix" style="margin-bottom:12px">
+      ${kcard('Patrimônio líquido', fidcMi(f.pl), 'PL sob gestão', 'var(--cyan)', 'Patrimônio líquido do fundo.')}
+      ${kcard('Direitos creditórios', fidcMi(f.exp), Math.round(f.exp/f.pl*100)+'% do PL alocado', null, 'Exposição em carteira de direitos creditórios.')}
+      ${kcard('Cedentes', f.cedentes, 'cedentes ativos no fundo', null, 'Número de cedentes que originam recebíveis para o fundo.')}
+      ${kcard('Inadimplência', fidcPct(f.inad), 'carteira vencida +90d', f.inad>=5?'var(--red)':f.inad>=3?'var(--amb)':'var(--grn)', 'Inadimplência da carteira do fundo.')}
+    </div>
+    <div class="g4fix" style="margin-bottom:12px">
+      ${kcard('Subordinação', fidcPct(f.subord), 'mínimo do regulamento '+fidcPct(f.subordMin), subCor, 'Razão de subordinação atual frente ao piso do regulamento.')}
+      ${kcard('Rentabilidade', f.rent+'% CDI', 'entregue à cota sênior', f.rent>=118?'var(--grn)':null, 'Rentabilidade entregue à cota sênior, em % do CDI.')}
+      ${kcard('Concentração', f.concTop+'%', 'maior cedente da carteira', f.concTop>=25?'var(--amb)':null, 'Participação do maior cedente na carteira do fundo.')}
+      ${kcard('Situação de risco', FIDC_STATUS[f.status].lbl, 'classificação interna', subCor, 'Situação de risco consolidada do fundo.')}
+    </div>
+    <div class="subhdr" style="margin-top:20px">Carteiras de cedentes do fundo <span class="info" data-tip="Como os cedentes deste FIDC estão organizados em carteiras. Os cedentes são geridos pelo analista do fundo — expanda para ver uma amostra."><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span></div>
+    <div class="mini" style="margin-top:-6px;margin-bottom:12px">${carts.length} carteira(s) · ${f.cedentes} cedentes · ${fidcMi(f.exp)} em direitos creditórios</div>
+    ${cartRows}`;
+  window.scrollTo(0,0);
+}
+function cfidcVoltar(){ document.getElementById('cfidc-detail').style.display='none'; document.getElementById('cfidc-list').style.display='block'; window.scrollTo(0,0); }
+function cfidcNoCockpit(id){ goCockpit(); ckfFocus(id); }
+function cfidcMonitorar(id){ goMonitoramento(); monNovo(); const f=fidcById(id); if(f) document.getElementById('mon-nome').value='Monitoramento — '+f.nome; monRenderCartList(new Set([id])); }
 
 function renderCockpitScope(C, prefix, escopoLabel){
   const decididos = C.filter(c=>c.status!=='analise');
@@ -3538,6 +4591,7 @@ function ckAnalistaFiltrar(){
   const C = val==='all' ? CEDENTES.filter(c=>minhasIds.includes(c.carteiraId)) : CEDENTES.filter(c=>c.carteiraId===val);
   const label = val==='all' ? `suas carteiras (${ckNomeAnalista(ANALISTA_ATUAL)})` : `carteira: ${ckNomeCarteira(val)}`;
   renderCockpitScope(C, 'cka', label);
+  renderCkaAprov();
 }
 
 function abrirCedente(id){
@@ -3568,10 +4622,16 @@ function goCockpitDossie(){
   document.getElementById('cockpitan').style.display='none';
   document.getElementById('historico').style.display='none';
   document.getElementById('carteiras').style.display='none';
+  document.getElementById('auditoria').style.display='none';
+  document.getElementById('monitoramento').style.display='none';
+  document.getElementById('aprovacoes').style.display='none';
   document.getElementById('nav-cockpit').classList.remove('on');
   document.getElementById('nav-cockpit-an').classList.remove('on');
   document.getElementById('nav-hist').classList.remove('on');
   document.getElementById('nav-cart').classList.remove('on');
+  document.getElementById('nav-aud').classList.remove('on');
+  document.getElementById('nav-mon').classList.remove('on');
+  document.getElementById('nav-aprov').classList.remove('on');
   document.getElementById('dossier').style.display='block';
   document.getElementById('subnav').style.display='block';
   renderKeyInd();
@@ -3579,10 +4639,253 @@ function goCockpitDossie(){
   window.scrollTo(0,0);
 }
 
+/* =================== DUPLA APROVAÇÃO — perfis, notificações, aprovações =================== */
+const PERSONAS={ gestor:{nome:'Waldick Soriano',cargo:'Asset Manager',ini:'WS'}, analista:{nome:'Marina Costa',cargo:'Analista de crédito',ini:'MC'} };
+let PERFIL='gestor';
+let NOTIF_READ=new Set();
+
+/* ---- login ---- */
+const LOGIN_CRED={ email:'marina.costa@nuclea.com.br', senha:'nuclea@2026' };
+function fazerLogin(){
+  const email=(document.getElementById('login-email').value||'').trim().toLowerCase();
+  const senha=document.getElementById('login-senha').value||'';
+  const err=document.getElementById('login-err');
+  if(email!==LOGIN_CRED.email || senha!==LOGIN_CRED.senha){
+    err.style.display='block';
+    return;
+  }
+  err.style.display='none';
+  document.getElementById('login').style.display='none';
+  document.getElementById('app').style.display='block';
+  setPerfil('analista');
+  window.scrollTo(0,0);
+}
+
+function applyPerfilMenu(){
+  const g = PERFIL==='gestor';
+  const show=(id,vis)=>{ const e=document.getElementById(id); if(e) e.style.display = vis?'' : 'none'; };
+  show('nav-cockpit', g);       // Cockpit do gestor — só gestor
+  show('nav-cockpit-an', !g);   // Cockpit do analista — só analista
+  show('nav-pol', !g);          // Política de risco — só analista (responsável pela política do FIDC)
+  show('nav-aud', g);           // Auditoria — só gestor
+  show('nav-mon', g);           // Monitoramento — só gestor
+  show('nav-aprov', g);         // Comitê — só gestor
+  show('side-gestao', true);    // "Gestão" sempre visível (Auditoria p/ gestor · Política p/ analista)
+  const cl=document.getElementById('nav-cart-label'); if(cl) cl.textContent = g?'Clientes (FIDCs)':'Carteiras e Clientes';
+}
+function renderHeaderPerfil(){
+  const u=PERSONAS[PERFIL];
+  document.getElementById('perfil-ini').textContent=u.ini;
+  document.getElementById('perfil-nome').textContent=u.nome;
+  document.getElementById('perfil-cargo').textContent=u.cargo;
+  document.getElementById('perfilopt-gestor').classList.toggle('act',PERFIL==='gestor');
+  document.getElementById('perfilopt-analista').classList.toggle('act',PERFIL==='analista');
+  applyPerfilMenu();
+  updateAprovBadge();
+}
+function togglePerfilMenu(e){ if(e) e.stopPropagation(); document.getElementById('notifpanel').classList.remove('open'); document.getElementById('perfilmenu').classList.toggle('open'); }
+function setPerfil(p){
+  if(!PERSONAS[p]) return;
+  PERFIL=p;
+  document.getElementById('perfilmenu').classList.remove('open');
+  renderHeaderPerfil();
+  renderNotif();
+  // se a página aberta não é permitida ao novo perfil, leva ao cockpit do perfil
+  const vis=id=>document.getElementById(id).style.display!=='none';
+  if(PERFIL==='analista'){
+    if(['cockpit','auditoria','monitoramento','aprovacoes'].some(vis)){ goCockpitAnalista(); return; }
+  } else {
+    if(['cockpitan','policy'].some(vis)){ goCockpit(); return; }
+  }
+  if(vis('cockpit')) renderCkAprovGestor();
+  if(vis('cockpitan')) renderCkaAprov();
+  if(vis('aprovacoes')) goAprovacoes();
+  if(vis('carteiras')) goCarteiras();
+}
+
+/* ---- notificações ---- */
+function relTime(ts){ const d=(Date.now()-ts)/86400000; if(d<1) return 'hoje'; if(d<2) return 'ontem'; return `há ${Math.round(d)} dias`; }
+function notifData(){
+  const list=[];
+  if(PERFIL==='gestor'){
+    HISTORICO.filter(h=>h.statusAprov==='analista').forEach(h=>{
+      list.push({ id:h.id, key:'gestor:'+h.id+':analista', titulo:'Você tem uma solicitação para revisar', sub:`${fidcNome(h.fidcId)} · ${h.razao} · ${histFmtBRL(h.exposicao)}`, ts:h.analistaTs||h.ts, acao:'review' });
+    });
+  } else {
+    const nome=PERSONAS.analista.nome;
+    HISTORICO.filter(h=>h.criador===nome && ['gestor','repr_gestor','revisao'].includes(h.statusAprov)).forEach(h=>{
+      const t = h.statusAprov==='gestor' ? 'O gestor aprovou sua solicitação'
+              : h.statusAprov==='repr_gestor' ? 'O gestor reprovou sua solicitação'
+              : 'O gestor solicitou mais informações sobre a sua solicitação';
+      list.push({ id:h.id, key:'analista:'+h.id+':'+h.statusAprov, titulo:t, sub:`${h.razao} · ${histFmtBRL(h.exposicao)}`, ts:h.gestorTs||h.ts, acao: h.statusAprov==='revisao'?'revisao':'cockpitan' });
+    });
+  }
+  list.sort((a,b)=>b.ts-a.ts);
+  return list;
+}
+function notifUnread(){ return notifData().filter(n=>!NOTIF_READ.has(n.key)); }
+function renderNotif(){
+  const data=notifData();
+  const box=document.getElementById('notif-list');
+  if(box){
+    box.innerHTML = data.length ? data.map(n=>{
+      const un=!NOTIF_READ.has(n.key);
+      return `<div class="notifitem ${un?'unread':''}" onclick="notifOpen('${n.key}')"><span class="notifdot"></span><div class="notiftxt"><b>${n.titulo}</b><span class="ntsub">${n.sub}</span><span class="notiftime">${relTime(n.ts)}</span></div></div>`;
+    }).join('') : '<div class="notifempty">Sem notificações no momento.</div>';
+  }
+  const n=notifUnread().length;
+  const badge=document.getElementById('bell-badge');
+  if(badge){ badge.textContent=n; badge.classList.toggle('hide',n===0); }
+  updateAprovBadge();
+}
+function toggleNotif(e){ if(e) e.stopPropagation(); const p=document.getElementById('notifpanel'); document.getElementById('perfilmenu').classList.remove('open'); const willOpen=!p.classList.contains('open'); renderNotif(); p.classList.toggle('open',willOpen); }
+function notifOpen(key){
+  const n=notifData().find(x=>x.key===key); if(!n) return;
+  NOTIF_READ.add(key);
+  document.getElementById('notifpanel').classList.remove('open');
+  renderNotif();
+  if(n.acao==='review'){ goAprovacoes(); abrirReview(n.id); }
+  else if(n.acao==='revisao'){ histAcessar(n.id); }
+  else { goCockpitAnalista(); }
+}
+function marcarTodasLidas(){ notifData().forEach(n=>NOTIF_READ.add(n.key)); renderNotif(); }
+function updateAprovBadge(){
+  const pend=HISTORICO.filter(h=>h.statusAprov==='analista').length;
+  const nb=document.getElementById('nav-aprov-badge');
+  if(nb){ nb.textContent=pend; nb.classList.toggle('hide', pend===0 || PERFIL!=='gestor'); }
+}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.perfilsw')) document.getElementById('perfilmenu').classList.remove('open');
+  if(!e.target.closest('.bellwrap')) document.getElementById('notifpanel').classList.remove('open');
+});
+
+/* ---- trilha de auditoria (eventos ao vivo) ---- */
+function audLog(cat, acao, detalhe, resultado){
+  const now=Date.now(); const u=PERSONAS[PERFIL];
+  AUDIT.unshift({ id:'a-live-'+now, ts:now, data:histFmtDT(now), usuario:u.nome, cargo:(PERFIL==='gestor'?'Gestor de crédito':'Analista de crédito'), categoria:cat, catLabel:(AUD_CATS[cat]||cat), acao, detalhe, resultado:resultado||'ok', ip:'201.17.42.9' });
+  if(document.getElementById('auditoria').style.display!=='none') renderAud();
+}
+
+/* ---- página Aprovações ---- */
+function goAprovacoes(){
+  ['home','policy','dossier','cockpit','cockpitan','historico','carteiras','auditoria','monitoramento'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('subnav').style.display='none';
+  document.getElementById('aprovacoes').style.display='block';
+  ['nav-novo','nav-pol','nav-cockpit','nav-cockpit-an','nav-hist','nav-cart','nav-aud','nav-mon'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  document.getElementById('nav-aprov').classList.add('on');
+  document.getElementById('aprov-review').style.display='none';
+  document.getElementById('aprov-lista').style.display='block';
+  renderAprovacoes();
+  window.scrollTo(0,0);
+}
+function aprSLA(h){ const dias=Math.floor((Date.now()-(h.analistaTs||h.ts))/86400000); return {dias, cls: dias>=4?'late':dias>=2?'warn':'ok'}; }
+function renderAprovacoes(){
+  const perfilGestor = PERFIL==='gestor';
+  const bn=document.getElementById('aprov-banner-perfil');
+  bn.innerHTML = perfilGestor ? '' : `<div class="aprbanner" style="margin:14px 0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div>A decisão em última instância é atribuição do <b>comitê da asset (Asset Manager)</b>. Você está navegando como <b>${PERSONAS[PERFIL].nome}</b> (analista) — troque o perfil no topo para revisar e decidir as solicitações abaixo.</div></div>`;
+  const pend=HISTORICO.filter(h=>h.statusAprov==='analista').sort((a,b)=>(a.analistaTs||a.ts)-(b.analistaTs||b.ts));
+  const sub=document.getElementById('aprov-sub');
+  sub.textContent = `${pend.length} solicitaç${pend.length===1?'ão':'ões'} de ${new Set(pend.map(h=>h.fidcId)).size} FIDC(s) aguardando a decisão do comitê.`;
+  const box=document.getElementById('aprov-cards');
+  if(!pend.length){ box.innerHTML='<div class="card" style="text-align:center;color:var(--mut);padding:28px">Nenhuma solicitação pendente. Tudo em dia.</div>'; return; }
+  box.innerHTML = pend.map(h=>{
+    const s=aprSLA(h);
+    return `<div class="aprcard"><div class="ac-l"><div class="acfidc">${fidcNome(h.fidcId)} <span class="mut" style="font-weight:400">· ${fidcCnpj(h.fidcId)}</span></div><b>${h.razao}</b><div class="acsub">cedente · analista ${h.criador} · parecer: ${h.decisaoAnalista}</div></div>`
+      +`<div class="ac-r"><span class="aprsla ${s.cls}">${s.dias===0?'hoje':s.dias+'d aguardando'}</span><div class="acval">${histFmtBRL(h.exposicao)}<span>score ${h.score}/100</span></div>`
+      +`<button class="btnpri" style="margin:0" ${perfilGestor?'':'disabled title="Troque para o perfil de Asset Manager"'} onclick="abrirReview('${h.id}')">Revisar</button></div></div>`;
+  }).join('');
+}
+function abrirReview(id){
+  const h=HISTORICO.find(x=>x.id===id); if(!h) return;
+  if(PERFIL!=='gestor') setPerfil('gestor');
+  if(document.getElementById('aprovacoes').style.display==='none') goAprovacoes();
+  document.getElementById('aprov-lista').style.display='none';
+  const box=document.getElementById('aprov-review'); box.style.display='block';
+  const s=aprSLA(h);
+  const decClass = h.decisaoAnalista==='Reprovar'?'b-red':(h.decisaoAnalista==='Aprovar'?'b-grn':'b-amb');
+  const scColor = h.score>=70?'var(--grn)':h.score>=48?'var(--amb)':'var(--red)';
+  box.innerHTML = `
+    <button class="backbtn" onclick="goAprovacoes()" style="margin-bottom:14px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Voltar às pendências</button>
+    <h1 style="margin-bottom:2px">${h.razao}</h1>
+    <div class="sub">Cedente · ${h.cnpj} · encaminhado por ${h.criador} · aguardando há ${s.dias===0?'menos de 1 dia':s.dias+' dias'}</div>
+    <div class="revgrid" style="margin-top:18px">
+      <div>
+        <div class="fidcbox">
+          <div class="fbic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M9 11h.01M15 11h.01"/></svg></div>
+          <div class="fbnm"><b>${fidcNome(h.fidcId)}</b><span>FIDC solicitante · CNPJ ${fidcCnpj(h.fidcId)}${fidcById(h.fidcId)?' · '+fidcById(h.fidcId).gestora:''}</span></div>
+          ${fidcById(h.fidcId)?`<div class="fbtag"><span class="badge ${FIDC_STATUS[fidcById(h.fidcId).status].cls}">${FIDC_STATUS[fidcById(h.fidcId).status].lbl}</span><div class="mut" style="font-size:11px;margin-top:3px">inad. ${fidcPct(fidcById(h.fidcId).inad)} · subord. ${fidcPct(fidcById(h.fidcId).subord)}</div></div>`:''}
+        </div>
+        <div class="revbox">
+          <div class="subhdr" style="margin-top:0">Parecer do analista</div>
+          <div style="margin-bottom:12px"><span class="badge ${decClass}">${h.decisaoAnalista.toUpperCase()}</span> <span class="mut" style="margin-left:8px">limite solicitado ${histFmtBRL(h.exposicao)}</span></div>
+          <div class="flabel" style="margin-top:0">Justificativa do analista</div>
+          <div class="card" style="margin-top:4px;line-height:1.55">${h.justificativa||'<i>—</i>'}</div>
+        </div>
+        <div class="revbox">
+          <div class="subhdr" style="margin-top:0">Resumo do dossiê <span class="mut" style="font-weight:400;font-size:12px">· ${h.resumo}</span></div>
+          <div class="g4fix">
+            <div class="card"><h4>Score mestre</h4><div class="big" style="font-size:17px;color:${scColor}">${h.score}/100</div><div class="mut">risco ${aprRisco(h.score)}</div></div>
+            <div class="card"><h4>Exposição</h4><div class="big" style="font-size:17px">${histFmtBRL(h.exposicao)}</div><div class="mut">limite pleiteado</div></div>
+            <div class="card"><h4>Rating interno</h4><div class="big" style="font-size:17px">${h.rating}</div><div class="mut">classificação da IA</div></div>
+            <div class="card"><h4>1ª instância (FIDC)</h4><div class="big" style="font-size:17px">${h.decisaoAnalista}</div><div class="mut">decisão do analista</div></div>
+          </div>
+          <button class="btn" style="margin-top:14px" onclick="histAcessar('${h.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Ver dossiê completo</button>
+        </div>
+        <div class="revbox">
+          <div class="subhdr" style="margin-top:0">Sua decisão em última instância</div>
+          <label class="flabel" style="margin-top:0">Justificativa do gestor (obrigatória)</label>
+          <textarea class="ftxt" id="rev-just" placeholder="Registre o racional da sua decisão — será anexado ao dossiê e à trilha de auditoria, e enviado ao analista…"></textarea>
+          <div class="gactions" style="margin-top:14px">
+            <button class="gbtn apr" onclick="gestorDecidir('${h.id}','aprovar')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Aprovar crédito</button>
+            <button class="gbtn info" onclick="gestorDecidir('${h.id}','info')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg> Solicitar mais informações</button>
+            <button class="gbtn rep" onclick="gestorDecidir('${h.id}','reprovar')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Reprovar crédito</button>
+          </div>
+        </div>
+      </div>
+      <div class="revbox">
+        <div class="subhdr" style="margin-top:0">Linha do tempo</div>
+        <ul class="tline">
+          <li class="done"><div class="tl-t">Dossiê gerado</div><div class="tl-m">${h.data} · ${h.criador}</div></li>
+          <li class="done"><div class="tl-t">Aprovado pelo analista</div><div class="tl-m">${h.analistaTs?histFmtDT(h.analistaTs):'—'} · ${h.criador}</div></li>
+          <li class="wait"><div class="tl-t">Decisão do Asset Manager</div><div class="tl-m">aguardando ${PERSONAS.gestor.nome}</div></li>
+        </ul>
+        <div class="mini" style="margin-top:14px;line-height:1.5">Reprovações do analista são finais e não chegam aqui. "Solicitar mais informações" devolve a solicitação como pendência editável ao analista, que ajusta e reenvia.</div>
+      </div>
+    </div>`;
+  window.scrollTo(0,0);
+}
+function gestorDecidir(id, tipo){
+  const h=HISTORICO.find(x=>x.id===id); if(!h) return;
+  if(PERFIL!=='gestor'){ alert('Apenas o Asset Manager decide em última instância. Troque o perfil no topo.'); return; }
+  const el=document.getElementById('rev-just'); const just=(el.value||'').trim();
+  if(!just){ alert('A justificativa do gestor é obrigatória para registrar a decisão.'); el.focus(); return; }
+  h.gestorJustificativa=just; h.gestorTs=Date.now();
+  let acaoAud, msg, res='ok';
+  if(tipo==='aprovar'){ h.statusAprov='gestor'; h.gestorDecisao='Aprovar'; acaoAud='Aprovou crédito (última instância)'; msg='Crédito aprovado em última instância. O analista foi notificado.'; }
+  else if(tipo==='reprovar'){ h.statusAprov='repr_gestor'; h.gestorDecisao='Reprovar'; acaoAud='Reprovou crédito (última instância)'; msg='Crédito reprovado. O analista foi notificado.'; res='neg'; }
+  else { h.statusAprov='revisao'; h.gestorDecisao='Solicitar mais informações'; acaoAud='Solicitou mais informações ao analista'; msg='Solicitação devolvida ao analista como pendência editável. Ele foi notificado para complementar e reenviar.'; }
+  audLog('dossie', acaoAud, `${fidcNome(h.fidcId)} · ${h.razao} · ${histFmtBRL(h.exposicao)}`, res);
+  renderNotif();
+  alert(msg);
+  goAprovacoes();
+}
+
+/* ---- seções de solicitações nos cockpits ---- */
+function renderCkAprovGestor(){
+  const el=document.getElementById('ck-aprov-sec'); if(el) el.innerHTML='';
+}
+function renderCkaAprov(){
+  const el=document.getElementById('cka-aprov-sec'); if(el) el.innerHTML='';
+}
+
+renderHeaderPerfil();
+renderNotif();
 vhtRender('12m');
-ckGestorPopularSelect();
-ckGestorFiltrar();
+ckfPopular();
+ckfFiltrar();
+renderCkAprovGestor();
 atualizarConfianca();
+renderPlanoDetalhe(PLANDEF.com.tags, 'Completo');
 /* fecha o menu mobile ao clicar em qualquer link de navegação e ao voltar para desktop */
 (function(){
   const side=document.querySelector('.side');
