@@ -356,6 +356,16 @@ section{margin-bottom:36px}
 .polcard-def{font-size:12px;color:var(--mut);line-height:1.55;margin-bottom:8px}
 .polcard-out{font-size:11px;color:var(--mut);margin-bottom:12px;display:flex;gap:5px}
 .polcard-out b{color:var(--cyan);font-weight:600}
+.dicbox{display:flex;flex-direction:column;gap:14px}
+.dicsub{font-size:12px;color:var(--mut);margin-bottom:12px}
+.dic-sec{font-size:12.5px;color:var(--cyan);text-transform:uppercase;letter-spacing:.3px;font-weight:600;margin:18px 0 8px}
+.dic-sec:first-child{margin-top:0}
+.dicitem{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--card);margin-bottom:10px}
+.dicitem-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:6px}
+.dicitem-top b{color:#fff;font-size:13px;line-height:1.35}
+.dicitem-out{font-size:11px;color:var(--mut);white-space:nowrap;flex-shrink:0}
+.dicitem-out b{color:var(--cyan);font-weight:600}
+.dicitem-def{font-size:12px;color:var(--mut);line-height:1.55}
 .polcard-rules{margin-top:auto;border-top:1px dashed rgba(255,255,255,.1);padding-top:11px}
 .polreg-hd{font-size:11px;color:var(--mut2);text-transform:uppercase;letter-spacing:.3px;font-weight:600;margin-bottom:8px}
 .polreg{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:8px}
@@ -1137,7 +1147,10 @@ details.exp summary:hover{color:#fff}
     <!-- ================= TELA 1 : NOVO DOSSIÊ ================= -->
     <div id="home">
       <div class="crumb">Operação &nbsp;›&nbsp; Dossiês &nbsp;›&nbsp; <b>Novo dossiê</b></div>
-      <h1>Novo dossiê</h1>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+        <h1 style="margin-bottom:0">Novo dossiê</h1>
+        <button class="btn" style="margin-top:4px" onclick="abrirDicionario()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Dicionário de indicadores</button>
+      </div>
       <div class="sub">Selecione o cliente e os dados que deseja consultar para gerar o dossiê ⓘ</div>
       <div class="inrow">
         <div class="field"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><div class="fw"><label>CNPJ ou Razão Social</label><input id="cnpj" value="01.754.239/0001-90 — Refrigeração Duo Frio Com. e Imp. S.A."></div></div>
@@ -2396,6 +2409,14 @@ details.exp summary:hover{color:#fff}
   </div>
 </div>
 
+<div class="modalbg" id="modaldic" onclick="if(event.target===this)fecharModal('modaldic')">
+  <div class="modal" style="max-width:640px;max-height:82vh;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><h3 style="font-size:18px;font-weight:500">Dicionário de indicadores</h3><span onclick="fecharModal('modaldic')" style="cursor:pointer;color:var(--mut)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></div>
+    <div class="dicsub">Descrição de todos os indicadores utilizados na análise de crédito, com o que cada um representa e a faixa de resultado possível.</div>
+    <input id="dic-busca" placeholder="Buscar indicador..." oninput="dicFiltrar(this.value)" style="margin-bottom:12px;flex-shrink:0">
+    <div id="dic-lista" style="overflow-y:auto;flex:1;padding-right:4px"></div>
+  </div>
+</div>
 <button class="backfab" id="backfab" onclick="navVoltar()" title="Voltar ao ponto da leitura"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg> Voltar à leitura</button>
 </div><!-- /#app -->
 <script>
@@ -2958,6 +2979,26 @@ function polInitFiltros(){
   if(cat && !cat.dataset.done){ cat.innerHTML = '<option value="all">Todas as categorias</option>' + SECORDER.map(s=>'<option value="'+s+'">'+s+'</option>').join(''); cat.dataset.done='1'; }
   if(fon && !fon.dataset.done){ const fs=[...new Set(SECORDER.map(s=>SECFONTE[s]))]; fon.innerHTML = '<option value="all">Todas as fontes</option>' + fs.map(f=>'<option value="'+f+'">'+f+'</option>').join(''); fon.dataset.done='1'; }
 }
+function abrirDicionario(){
+  document.getElementById('modaldic').style.display='flex';
+  document.getElementById('dic-busca').value='';
+  renderDicionario('');
+  setTimeout(()=>document.getElementById('dic-busca').focus(),30);
+}
+function renderDicionario(q){
+  q=(q||'').trim().toLowerCase();
+  const box=document.getElementById('dic-lista'); if(!box) return;
+  let total=0;
+  const html = SECORDER.map(sec=>{
+    const itens = POLRULES.filter(r=>r.sec===sec && (!q || (r.nome+' '+r.def_+' '+(r.tipo||'')).toLowerCase().includes(q)));
+    if(!itens.length) return '';
+    total+=itens.length;
+    return '<div class="dic-sec">'+sec+'</div>'
+      + itens.map(r=>'<div class="dicitem"><div class="dicitem-top"><b>'+r.nome+'</b><span class="dicitem-out"><b>Output:</b> '+r.faixa+'</span></div><div class="dicitem-def">'+r.def_+'</div></div>').join('');
+  }).join('');
+  box.innerHTML = total ? html : '<div class="mini" style="padding:20px 4px;text-align:center">Nenhum indicador encontrado.</div>';
+}
+function dicFiltrar(v){ renderDicionario(v); }
 function renderPolicy(){
   const box = document.getElementById('pol-cards');
   if(!box) return;
